@@ -1,0 +1,52 @@
+<nz-page-header
+      class="site-page-header"
+      (nzBack)="onBack()"
+      nzBackIcon
+      nzTitle="Địa chỉ"
+    ></nz-page-header>
+<div style="padding: 50px;">
+  <form nz-form [formGroup]="addressForm" >
+   <ng-container *ngFor="let item of listOfControl;  let i = index">
+    <nz-form-item >
+      <nz-form-label *ngIf="i===0" [nzXs]="24" [nzSm]="4" [nzFor]="item.controlInstance"> Địa chỉ </nz-form-label>
+      <nz-form-control
+        [nzXs]="24"
+        [nzSm]="20"
+        [nzOffset]="i === 0 ? 0 : 4"
+        nzErrorTip="Please input passenger's name or delete this field."
+      >
+        <input
+          class="passenger-input"
+          nz-input
+          placeholder="Điền địa chỉ mới"
+          [attr.id]="item.id"
+          [formControlName]="item.controlInstance"
+        >
+        <span
+        *ngIf="isEditting"
+          nz-icon
+          nzType="minus-circle-o"
+          class="dynamic-delete-button"
+          (click)="removeField(item, $event)"
+          style="margin-bottom: 10px;"
+        ></span>
+      </nz-form-control>
+    </nz-form-item>
+   </ng-container>
+  <nz-form-item *ngIf="isEditting">
+    <nz-form-control [nzXs]="{ span: 24, offset: 0 }" [nzSm]="{ span: 20, offset: 4 }">
+      <button nz-button nzType="dashed" class="add-button" (click)="addField('',$event)">
+        <span nz-icon nzType="plus"></span>
+        Thêm địa chỉ
+      </button>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control [nzXs]="{ span: 24, offset: 0 }" [nzSm]="{ span: 20, offset: 4 }">
+      <button  nz-button nzType="primary" (click)="onBtnEdit()" style="margin-right: 10px;">{{isEditting? 'Quay lại':'Sửa'}}</button>
+      <button *ngIf="isEditting" nz-button nzType="primary" (click)="submitForm()">Lưu</button>
+    </nz-form-control>
+  </nz-form-item>
+  </form>
+
+</div>

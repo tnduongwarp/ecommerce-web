@@ -1,0 +1,100 @@
+<section id="product">
+  <div class="container-fluid p-5">
+    <div *ngIf="!product" class="m-auto">
+      <h1 class="text-center display-3 mt-5">
+        <i class="fa fa-spinner fa-spin"></i>
+      </h1>
+    </div>
+    <div *ngIf="product">
+      <div class="row">
+        <div class="col-lg-4">
+          <nz-carousel nzAutoPlay style="height: 500px; border: solid 1px #c9c9c9;">
+              <div  *ngFor="let item of product.image" nz-carousel-content style="display: flex; justify-content: center; align-items: center;">
+                <img nz-image [nzSrc]="item" alt="productImage">
+              </div>
+          </nz-carousel>
+        </div>
+        <div class="col-lg-5">
+          <div class="row">
+            <div class="col-6">
+              <h4>{{ product.title }}</h4>
+              <p class="m-0">
+               <img src="/assets/img/location.png" alt="" width="20px" height="15px"> {{ product.owner.shopAddress }} <span style="color: #8d8a8a; margin-left: 20px;">{{product.amount - product.sold}} sản phẩm có sẵn</span>
+              </p>
+
+            </div>
+            <div class="col-6">
+              <nz-rate [ngModel]="product?.avgRating || 0" nzAllowHalf nzDisabled></nz-rate>
+              (<span>{{product?.totalRate || 0}}</span>)
+            </div>
+          </div>
+          <hr>
+          <p class="lead" id="description"></p>
+        </div>
+        <div class="col-lg-3">
+          <div class="card bg-light">
+            <div class="card-body">
+              <h5 class="card-title">Giá: {{ convertNumberToCurrency(product.price) }}</h5>
+              <br>
+              <div>
+                <span style="margin-right: 20px;">Số lượng: </span>
+                <nz-input-number [(ngModel)]="quantity" [nzMin]="1" [nzMax]="product.amount - product.sold" [nzStep]="1"></nz-input-number>
+              </div>
+              <br>
+              <button class="btn btn-warning btn-block" [disabled]="product.amount - product.sold < 1" (click)="addToCart()">Thêm vào giỏ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="mt-5 ml-lg-5">
+          <h4>Đánh giá ({{product?.totalRate || 0}})</h4>
+          <hr>
+          <div class="reviews">
+            <div *ngFor="let review of product.reviews" class="review">
+              <div class="p-3">
+                <div style="display: flex; align-items: center; ">
+                  <img [src]="review.owner.picture" alt="" width="40px" class="rounded-circle">
+                  <div class="lead d-inline ml-3" style="font-size: 15px; font-weight: 500;">{{ review.owner.name }}</div>
+                </div>
+                <nz-rate style="transform: scale(0.7);" [ngModel]="review.rating" nzAllowHalf nzDisabled></nz-rate>
+                <p class="mt-3">{{ review.description }}</p>
+              </div>
+              <nz-divider></nz-divider>
+            </div>
+            <!-- <div class="card bg-light my-5">
+              <div class="card-body">
+                <h4 class="card-title">Add a review</h4>
+                <hr>
+                <div class="form">
+                  <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" name="title" class="form-control" [(ngModel)]="myReview.title">
+                  </div>
+                  <div class="form-group">
+                    <label>Description</label>
+                    <textarea class="form-control" rows="5" name="description" [(ngModel)]="myReview.description"></textarea>
+                  </div>
+                  <label>Rating</label>
+                  <br>
+                  <nz-rate [ngModel]="product?.avgRating || 0" nzAllowHalf></nz-rate>
+                  <br>
+                  <br>
+                  <button type="button" class="btn btn-info" (click)="postReview()" [disabled]="btnDisabled">Post Review</button>
+                </div>
+              </div>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ng-template #t let-fill="fill">
+  <span *ngIf="fill === 100" class="star full">&#9733;</span>
+  <span *ngIf="fill === 0" class="star">&#9733;</span>
+  <span *ngIf="fill < 100 && fill > 0" class="star">
+    <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+  </span>
+</ng-template>

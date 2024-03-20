@@ -1,0 +1,41 @@
+.item {
+  position: relative;
+  width: 100%;
+  transform: translateX((-90%));
+}
+
+.card-img-top {
+  width: 100%;
+  height: 15vw;
+  object-fit: cover;
+}
+.lead{
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 10px;
+}
+.fadeIn{
+  animation: fadeIn 3s;
+}
+
+.hover-move-up{
+  transition: transform 0.1s ease;
+}
+.hover-move-up:hover{
+  animation: moveUp 0.1s forwards;
+}
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes moveUp {
+  from {
+    transform: translateY(0); /* Không di chuyển */
+  }
+  to {
+    transform: translateY(-3px); /* Di chuyển lên 2px */
+  }
+}
+

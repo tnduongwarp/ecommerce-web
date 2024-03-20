@@ -1,0 +1,65 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-main" style="padding-bottom: 0;">
+  <div class="container-fluid">
+    <a routerLink="/" class="navbar-brand">
+      <img src="./assets/img/logo.png" alt="logo" id="logo"> ECommerce
+    </a>
+    <button class="navbar-toggler" (click)="isCollapsed = !isCollapsed">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div [ngbCollapse]="isCollapsed" style="align-items: left;" class="collapse navbar-collapse flex-column"
+      id="navbarNav">
+      <div class="input-group w-75">
+        <input type="text" name="search" class="form-control" [(ngModel)]="searchTerm" (keyup.enter)="search()">
+        <span id="searchBtn" class="bg-warning" (click)="search()">
+          <i class="fa fa-search"></i>
+        </span>
+      </div>
+      <div class="w-100">
+        <ul class="navbar-nav">
+          <li class="nav-item ml-0 ml-md-auto" style="display: flex;">
+            <a  [routerLink]="['/']" [queryParams]="{product: 'all'}" routerLinkActive="active" class="nav-link category" [ngClass]="{'selected': presentCategory == 'all'}"><span nz-icon nzType="unordered-list" nzTheme="outline"></span><br/><b>All</b></a>
+            <a *ngFor="let item of categories" [routerLink]="['/']" [queryParams]="{product: item.url}" routerLinkActive="active" class="nav-link category" [ngClass]="{'selected': presentCategory == item.url}"><span nz-icon [nzType]="item.icon" nzTheme="outline"></span><br/><span><b>{{getCategoryText(item.name)}}</b></span></a>
+          </li>
+
+
+          <li class="nav-item ml-0 ml-md-auto" ngbDropdown #dropdown="ngbDropdown">
+            <a class="nav-link dropdown-toggle" ngbDropdownToggle>
+              <i class="fa fa-user mr-1"></i>
+              <span *ngIf="!token">Tài khoản</span>
+              <span *ngIf="data.user">{{ data.user.name }}</span>
+            </a>
+            <div ngbDropdownMenu class="dropdown-menu">
+              <a *ngIf="token" (click)="closeDropdown(dropdown);collapse();" routerLink="/profile" class="dropdown-item">
+                <i class="fa fa-user-circle" aria-hidden="true"></i> Hồ sơ
+              </a>
+              <a *ngIf="!token" (click)="closeDropdown(dropdown);collapse();" routerLink="/login" class="dropdown-item">
+                <i class="fa fa-key" aria-hidden="true"></i> Dăng nhập
+              </a>
+              <a *ngIf="token" (click)="closeDropdown(dropdown);collapse();logout();" class="dropdown-item">
+                <i class="fa fa-key" aria-hidden="true"></i> Đăng xuất
+              </a>
+              <a *ngIf="!token" (click)="closeDropdown(dropdown);collapse();" routerLink="/register" class="dropdown-item">
+                <i class="fa fa-group" aria-hidden="true"></i> Đăng kí
+              </a>
+            </div>
+          </li>
+          <li class="nav-item ml-0 ml-md-2">
+            <a (click)="collapse()" routerLink="/cart" routerLinkActive="active" class="nav-link">
+              <i class="fa fa-shopping-cart mr-1"></i>
+              Giỏ hàng
+              <span *ngIf="data.cartItems" class="badge badge-warning ml-1">{{ data.cartItems }}</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<router-outlet/>
+
+<footer id="main-footer" class="bg-main text-white p-5">
+  <div class="container">
+    <p class="lead text-center">Copyright &copy; 2023 ECommerce-TND</p>
+  </div>
+</footer>

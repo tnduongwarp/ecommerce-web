@@ -1,0 +1,26 @@
+.login-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.login-form {
+  max-width: 400px;
+  margin: auto;
+  margin-top: 100px;
+  border: solid 1px #d0cece;
+  border-radius: 10px;
+  padding: 10px 50px 50px;
+}
+
+.login-form-margin {
+  margin-bottom: 16px;
+}
+
+.login-form-forgot {
+  float: right;
+  color: aqua;
+}
+
+.login-form-button {
+  width: 100%;
+}

@@ -1,0 +1,73 @@
+<section id="cart">
+  <div class="container-fluid p-5">
+    <app-message></app-message>
+    <h3 *ngIf="!cartItems.length" class="display-2 text-center mt-5">Giỏ hàng đang trống</h3>
+    <div *ngIf="cartItems.length" class="row">
+      <div class="col-md-9">
+        <p class="lead font-weight-bold">Giỏ hàng({{cartItems.length}})</p>
+        <div class="row">
+          <div class="offset-8 col-2 d-none d-md-block">
+            <p>
+              <small class="text-muted">Giá</small>
+            </p>
+          </div>
+          <div class="col-2 d-none d-md-block">
+            <p>
+              <small class="text-muted">Số lượng</small>
+            </p>
+          </div>
+        </div>
+        <hr class="mt-0">
+        <div *ngFor="let item of cartItems; let i=index;" class="cartItem">
+          <div class="row">
+            <div class="col-4 col-md-2" style="display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+              <div nz-checkbox [(ngModel)]="item.chosen"></div>
+              <a routerLink="/product/{{ item.product._id }}">
+                <img src="{{ item.product.image }}" alt="productImage" class="img-fluid img-thumbnail">
+              </a>
+            </div>
+            <div class="col-5 col-md-6">
+              <h5>
+                <a routerLink="/product/{{  item.product._id }}">{{  item.product.title }}</a>
+              </h5>
+              <p class="m-0">
+                <span nz-icon nzType="shopping-cart"  style="font-size: 16px; color: rgb(255, 156, 43); margin-right: 5px;" ></span>
+                <small class="text-muted">{{  item.product.owner.shopName }} - {{item.product.owner.shopAddress}}</small>
+              </p>
+              <!-- <p class="m-0">
+                <small class="text-muted">{{ item.category.name }}</small>
+              </p> -->
+              <a
+                nz-popconfirm
+                nzPopconfirmTitle="Xóa vật phẩm này?"
+                nzOkText="Xác nhận"
+                nzCancelText="Hủy"
+                (nzOnConfirm)="removeProduct(i)"
+                class="text-danger"
+              >Xóa</a>
+            </div>
+            <div class="col-1 col-md-2">
+              <h6 class="font-weight-bold text-danger">{{ convertNumberToCurrency(item.product.price) }}</h6>
+            </div>
+            <div class="col-1 mt-5 mt-md-0 p-0">
+              <nz-input-number [(ngModel)]="item.quantity" [nzMin]="1" [nzMax]="item.product.amount - item.product.sold" [nzStep]="1"></nz-input-number>
+              <!-- <input type="number" class="form-control" min="1" max="99" [(ngModel)]="item.quantity"> -->
+            </div>
+          </div>
+          <hr>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card bg-light">
+          <div class="card-body">
+            <h5>Total:
+              <span class="ml-1 font-weight-bold text-danger">{{ convertNumberToCurrency(cartTotal) }}</span>
+            </h5>
+            <br>
+            <button class="btn btn-warning btn-block" (click)="checkout()" [disabled]="btnDisabled">Mua hàng</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

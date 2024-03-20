@@ -1,0 +1,30 @@
+#searchBtn {
+  cursor: pointer;
+  border: none;
+  padding: 0.375rem 0.75rem;
+  margin-bottom: 0;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+}
+
+#logo {
+  width: 50px;
+}
+.nav-item{
+  cursor: pointer;
+  margin-top: 5px;
+}
+.category{
+  width: 90px;
+  text-align: center;
+}
+.category:hover{
+  background-color: rgb(199, 199, 199);
+}
+.selected{
+  background-color: rgb(150, 146, 146);
+}
+

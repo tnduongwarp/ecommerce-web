@@ -1,0 +1,43 @@
+<section id="profile">
+  <div class="">
+    <div *ngIf="!user" class="m-auto">
+      <h1 class="text-center display-3 mt-5">
+        <i class="fa fa-spinner fa-spin"></i>
+      </h1>
+    </div>
+    <div *ngIf="user" style="display: flex;">
+      <div class="pt-5" style="background-color: rgb(230, 230, 230); width: 8vw; padding-right: 10px;">
+        <img [src]="user.picture" alt="userimage" class="rounded-circle image">
+      </div>
+      <div class="pt-5" style="background-color: rgb(230, 230, 230); width: 20vw;">
+        <p id="name" class="lead" style="margin-top: 10px; margin-bottom: 30px;">{{ user.firstname + ' ' + user.lastname }}</p>
+        <a routerLink="/profile/account" ><span [ngClass]="{'selected': isSelected('account')}" style="font-size: 20px; ">Tài khoản</span></a>
+        <br>
+        <br>
+        <a routerLink="/profile/address" ><span [ngClass]="{'selected': isSelected('address')}" style="font-size: 20px; ">Địa chỉ</span></a>
+        <br>
+        <br>
+        <a routerLink="/profile/orders"><span [ngClass]="{'selected': isSelected('orders')}" style="font-size: 20px;">Đơn hàng</span></a>
+        <br>
+        <br>
+        <br>
+        <br>
+        <!-- <div *ngIf="user.isSeller">
+          <p class="lead">Seller Actions</p>
+          <hr>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <a routerLink="/profile/postproduct" class="btn btn-outline-success btn-block">Post Product for Sale</a>
+            </div>
+            <div class="col-md-6">
+              <a routerLink="/profile/myproducts" class="btn btn-outline-info btn-block">My Products</a>
+            </div>
+          </div>
+        </div> -->
+      </div>
+      <div style=" height: 100vh; width: 100%;">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</section>
