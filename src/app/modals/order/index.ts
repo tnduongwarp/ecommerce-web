@@ -16,8 +16,13 @@ export class Order extends BaseComponent {
   public cartItems: any = []
   btnDisabled = false;
   handler: any;
+  public orderAddress: string;
+  public address: string[];
+  public paymentType = 1;
   constructor(private router: Router, @Inject(NZ_MODAL_DATA) public  dataInput: ModalData) {
     super();
+    this.orderAddress = JSON.parse(localStorage.getItem('user')!)?.metadata?.defaultAddress || JSON.parse(localStorage.getItem('user')!)?.address[0];
+    this.address = JSON.parse(localStorage.getItem('user')!)?.address;
   }
 
   trackByCartItems(index: number, item: any) {
@@ -30,7 +35,7 @@ export class Order extends BaseComponent {
     this.cartItems.forEach((data: any, index: any) => {
       total += data.product.price * data.quantity;
     });
-    return total;
+    return total + 20000;
   }
 
 
@@ -43,5 +48,21 @@ export class Order extends BaseComponent {
 
 
   checkout() {
+    if(this.paymentType === 1){
+      let body: any = {};
+      body['owner'] = JSON.parse(localStorage.getItem('user')!)._id;
+      body['address'] = this.orderAddress;
+      body['totalPrice'] = this.cartTotal;
+      body['products'] = this.cartItems.map((item: any) => {
+        return {
+          productId: item.product._id,
+          quantity: item.quantity
+        }
+      });
+      body['paymentType'] = this.paymentType;
+      this.api.post(Const.API_ORDER, body)
+      .then(data => console.log(data))
+      .catch(err => console.log(err))
+    }
   }
 }

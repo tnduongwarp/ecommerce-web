@@ -9,6 +9,11 @@
           </div>
           <div>Địa chỉ nhận hàng</div>
         </div>
+        <div style="font-size: 17px; display: flex; justify-content: space-between;">
+          <nz-select [(ngModel)]="orderAddress">
+            <nz-option *ngFor="let item of address" [nzValue]="item" [nzLabel]="item"></nz-option>
+          </nz-select>
+        </div>
       </div>
     </div>
     <div *ngIf="cartItems.length" class="row">
@@ -66,10 +71,18 @@
     <div class="row">
       <div class="card bg-light">
         <div class="card-body">
+          <div>
+            <span>Phí vận chuyển: 20.000đ</span>
+          </div>
           <h5>Tổng thanh toán:
             <span class="ml-1 font-weight-bold text-danger">{{ convertNumberToCurrency(cartTotal) }}</span>
           </h5>
           <br>
+          <div>Chọn hình thức thanh toán:</div>
+          <nz-radio-group [(ngModel)]="paymentType" nzButtonStyle="solid" style="margin-bottom: 50px;">
+            <label nz-radio-button [nzValue]="1">Thanh toán khi nhận hàng</label>
+            <label nz-radio-button [nzValue]="2">Thanh toán qua Paypal</label>
+          </nz-radio-group>
           <button class="btn btn-warning btn-block" (click)="checkout()" [disabled]="btnDisabled">Mua hàng</button>
         </div>
       </div>

@@ -5,6 +5,7 @@
   font-size: 24px;
   color: #999;
   transition: all 0.3s;
+  margin-bottom: 50px;
 }
 
 .dynamic-delete-button:hover {

@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ProfileComponent extends BaseComponent {
   public user: any;
   constructor() {
-    super()
+    super();
    }
 
   override ngOnInit() {

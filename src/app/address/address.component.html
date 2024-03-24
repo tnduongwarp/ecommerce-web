@@ -8,29 +8,31 @@
   <form nz-form [formGroup]="addressForm" >
    <ng-container *ngFor="let item of listOfControl;  let i = index">
     <nz-form-item >
-      <nz-form-label *ngIf="i===0" [nzXs]="24" [nzSm]="4" [nzFor]="item.controlInstance"> Địa chỉ </nz-form-label>
+      <nz-form-label *ngIf="i===0" [nzXs]="24" [nzSm]="4" [nzFor]="item.controlInstance" style="font-size: 20px; font-weight: bold; color: #a7a1a1;"> Địa chỉ </nz-form-label>
       <nz-form-control
         [nzXs]="24"
         [nzSm]="20"
         [nzOffset]="i === 0 ? 0 : 4"
-        nzErrorTip="Please input passenger's name or delete this field."
+        nzErrorTip="Không được bỏ trống thông tin này."
       >
-        <input
+        <textarea
           class="passenger-input"
           nz-input
+          rows="3"
           placeholder="Điền địa chỉ mới"
           [attr.id]="item.id"
           [formControlName]="item.controlInstance"
-        >
+        ></textarea>
+        <nz-tag *ngIf="isDefaultAddress(item)" [nzColor]="'orange'" style="margin-bottom: 50px;">Default</nz-tag>
         <span
         *ngIf="isEditting"
           nz-icon
           nzType="minus-circle-o"
           class="dynamic-delete-button"
           (click)="removeField(item, $event)"
-          style="margin-bottom: 10px;"
         ></span>
       </nz-form-control>
+
     </nz-form-item>
    </ng-container>
   <nz-form-item *ngIf="isEditting">
@@ -48,5 +50,12 @@
     </nz-form-control>
   </nz-form-item>
   </form>
+
+  <div *ngIf="!isEditting" style="margin-left: 9%;">
+    <label nz-label style="margin-right: 20px; font-weight: bold;color: #a7a1a1;">Mặc định: </label>
+    <nz-select  [(ngModel)]="defaultAddr" (ngModelChange)="changeDefaultAddress($event)">
+      <nz-option *ngFor="let item of address" [nzValue]="item" [nzLabel]="item"></nz-option>
+    </nz-select>
+  </div>
 
 </div>

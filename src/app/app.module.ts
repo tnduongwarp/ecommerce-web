@@ -54,6 +54,7 @@ import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { Order } from './modals/order';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
+import { NzTagModule } from 'ng-zorro-antd/tag';
 
 registerLocaleData(en);
 
@@ -109,7 +110,8 @@ registerLocaleData(en);
     NzMessageModule,
     NzPopconfirmModule,
     NzDatePickerModule,
-    NzPageHeaderModule
+    NzPageHeaderModule,
+    NzTagModule
   ],
   providers: [RestApiService, DataService, AuthGuardService,
     { provide: NZ_I18N, useValue: en_US },

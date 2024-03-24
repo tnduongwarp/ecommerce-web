@@ -23,6 +23,8 @@ export class AddressComponent extends BaseComponent {
   addressForm: FormRecord<FormControl<string>> = this.fb.record({});
   listOfControl: Array<{ id: number; controlInstance: string }> = [];
   isEditting = false;
+  defaultAddr: string = '';
+  address: any = [];
   addField(addr? : string,e?: MouseEvent): void {
     e?.preventDefault();
 
@@ -57,7 +59,9 @@ export class AddressComponent extends BaseComponent {
       if(!id) return;
       this.api.post(`${Const.API_USER}/${id}`, {address}).then(
         (res: any) => {
-          localStorage.setItem('user', JSON.stringify(res.data))
+          localStorage.setItem('user', JSON.stringify(res.data));
+          this.address = res.data?.address;
+          this.defaultAddr = res.data?.metadata?.defaultAddress;
           this.onBtnEdit();
           this.message.success('Chỉnh sửa địa chỉ thành công')
         }
@@ -83,11 +87,12 @@ export class AddressComponent extends BaseComponent {
   }
 
   override ngOnInit(): void {
-    const address = JSON.parse(localStorage.getItem('user')!)?.address;
-    if(!address)
+    this.address = JSON.parse(localStorage.getItem('user')!)?.address;
+    this.defaultAddr = JSON.parse(localStorage.getItem('user')!)?.metadata?.defaultAddress;
+    if(!this.address)
       this.addField();
     else{
-      for(let item of address){
+      for(let item of this.address){
         this.addField(item);
       }
     }
@@ -101,5 +106,27 @@ export class AddressComponent extends BaseComponent {
       if(this.isEditting) control.enable();
       else control.disable()
      });
+  }
+
+  isDefaultAddress(listOfControlItem: {id: number; controlInstance: string}){
+    return this.addressForm.get(listOfControlItem.controlInstance)?.value == this.defaultAddr
+  }
+
+  changeDefaultAddress(event: string){
+    let metadata = JSON.parse(localStorage.getItem('user')!)?.metadata;
+    metadata['defaultAddress'] = event;
+    const id = JSON.parse(localStorage.getItem('user')!)._id;
+      if(!id) return;
+      this.api.post(`${Const.API_USER}/${id}`, {metadata}).then(
+        (res: any) => {
+          localStorage.setItem('user', JSON.stringify(res.data));
+          this.address = res.data?.address;
+          this.defaultAddr = res.data?.metadata?.defaultAddress;
+          this.message.success('Chỉnh sửa địa chỉ mặc định thành công')
+        }
+      ).catch((err: any) => {
+        console.log(err);
+        this.message.error(err.error.message)
+      })
   }
 }
