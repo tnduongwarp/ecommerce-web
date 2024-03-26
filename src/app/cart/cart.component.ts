@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Const } from '../const/const';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { Order } from '../modals/order';
+import isThisHour from 'date-fns/esm/isThisHour/index.js';
 
 @Component({
   selector: 'app-cart',
@@ -16,6 +17,7 @@ export class CartComponent extends BaseComponent {
   handler: any;
   public cartItems: any = [];
   public quantities: any = [];
+  public modalRef: any
   constructor(private router: Router, private modalService: NzModalService) {
     super();
   }
@@ -36,9 +38,9 @@ export class CartComponent extends BaseComponent {
 
   removeProduct(index: any) {
     let productNeedRemove = this.cartItems[index];
-    this.api.post(Const.API_CART_URL+'/remove-item', {userId: JSON.parse(localStorage.getItem('user')!)._id, productId: productNeedRemove.product._id})
+    this.api.post(Const.API_CART_URL+'/remove-item', {userId: JSON.parse(localStorage.getItem('user')!)._id, productIds: [productNeedRemove.product._id]})
     .then((data: any) =>{
-      this.cartItems = this.cartItems.filter((item: any) => (item.product._id.toString() !== productNeedRemove.product._id))
+      this.cartItems = this.cartItems.filter((item: any) => (item.product._id.toString() !== productNeedRemove.product._id));
     })
     .catch((err: any) => {
       console.log(err)
@@ -46,6 +48,11 @@ export class CartComponent extends BaseComponent {
   }
 
   override ngOnInit() {
+    this.getData();
+  }
+
+  getData(){
+    if(this.modalRef) this.modalRef.close();
     let userId = JSON.parse(localStorage.getItem('user')!)._id;
     if(!userId) this.cartItems = [];
     else{
@@ -59,7 +66,6 @@ export class CartComponent extends BaseComponent {
       .catch(err => console.log(err))
     }
   }
-
   validate() {
     if (!this.quantities.every((data: any) => data > 0)) {
       this.data.warning('Quantity cannot be less than one.');
@@ -79,7 +85,7 @@ export class CartComponent extends BaseComponent {
 
   checkout() {
     console.log(this.cartItems)
-    this.modalService.create({
+    this.modalRef = this.modalService.create({
       nzTitle: 'Mua hàng',
       nzFooter: null,
       nzWidth: '100%',
@@ -91,8 +97,11 @@ export class CartComponent extends BaseComponent {
       },
       nzContent: Order,
       nzData: {
-        cartItems: this.cartItems.filter((it: any) => (it.chosen))
-      }
+        cartItems: this.cartItems.filter((it: any) => (it.chosen)),
+        refreshCart: () => {
+          this.getData();
+        },
+      },
     });
   }
 }

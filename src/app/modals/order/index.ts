@@ -3,8 +3,10 @@ import { BaseComponent } from '../../base/base.component';
 import { Router } from '@angular/router';
 import { Const } from '../../const/const';
 import { NZ_MODAL_DATA } from 'ng-zorro-antd/modal';
+import { NzMessageService } from 'ng-zorro-antd/message';
 export interface ModalData {
   cartItems: string;
+  refreshCart: any
 }
 @Component({
   selector: 'order',
@@ -19,7 +21,8 @@ export class Order extends BaseComponent {
   public orderAddress: string;
   public address: string[];
   public paymentType = 1;
-  constructor(private router: Router, @Inject(NZ_MODAL_DATA) public  dataInput: ModalData) {
+  public refreshCartItem: any;
+  constructor(private router: Router,private message: NzMessageService ,@Inject(NZ_MODAL_DATA) public  dataInput: ModalData) {
     super();
     this.orderAddress = JSON.parse(localStorage.getItem('user')!)?.metadata?.defaultAddress || JSON.parse(localStorage.getItem('user')!)?.address[0];
     this.address = JSON.parse(localStorage.getItem('user')!)?.address;
@@ -44,6 +47,7 @@ export class Order extends BaseComponent {
     let userId = JSON.parse(localStorage.getItem('user')!)._id;
     if(!userId) this.cartItems = [];
     else this.cartItems = this.dataInput.cartItems;
+    this.refreshCartItem = this.dataInput.refreshCart;
   }
 
 
@@ -61,7 +65,19 @@ export class Order extends BaseComponent {
       });
       body['paymentType'] = this.paymentType;
       this.api.post(Const.API_ORDER, body)
-      .then(data => console.log(data))
+      .then(data => {
+        const removeItemBody = {
+          userId: body.owner,
+          productIds: this.cartItems.map((item: any) => item.product._id)
+        }
+        this.api.post(Const.API_CART_URL+'/remove-item', removeItemBody).then(
+          (res: any) => {
+            this.message.success('Đặt hàng thành công, vui lòng kiểm tra đơn hàng trong mục đơn hàng.');
+            this.refreshCartItem();
+
+          }
+        )
+      })
       .catch(err => console.log(err))
     }
   }

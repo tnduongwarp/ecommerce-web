@@ -9,6 +9,8 @@ import { RestApiService } from '../service/rest-api.service';
 import { BaseComponent } from '../base/base.component';
 import { Const } from '../const/const';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { Order } from '../modals/order';
 
 //component specific details
 @Component({
@@ -23,17 +25,23 @@ export class ProductComponent extends BaseComponent {
   quantity = 1;
   product: any;
   public id: string;
+  public modalRef: any
 
   constructor(
     public activatedRoute: ActivatedRoute,
     public router: Router,
-    private message: NzMessageService
+    private message: NzMessageService,
+    private modalService: NzModalService
   ) {
     super();
     this.id = this.activatedRoute.snapshot.params['id'];
   }
 
   override ngOnInit() {
+    this.getData()
+  }
+  public getData(){
+    if(this.modalRef) this.modalRef.close();
     if(this.id) this.api.get(Const.API_GET_LIST_PRODUCT + '/' + this.id)
     .then((res: any) => {
       console.log(res.data)
@@ -48,7 +56,6 @@ export class ProductComponent extends BaseComponent {
     })
     .catch(err => console.log(err))
   }
-
   addToCart() {
     let userId = JSON.parse(localStorage.getItem('user')!)._id;
     const body = {
@@ -67,6 +74,33 @@ export class ProductComponent extends BaseComponent {
     })
   }
 
+  public buyNow(){
+    let product = {...this.product};
+    product.image = product.image[0]
+    this.modalRef = this.modalService.create({
+      nzTitle: 'Mua hàng',
+      nzFooter: null,
+      nzWidth: '100%',
+      nzMaskClosable: false,
+      nzBodyStyle: {
+        'height': '100%',
+        'top': '0',
+        'overflow': 'auto',
+      },
+      nzContent: Order,
+      nzData: {
+        cartItems: [
+          {
+            product: product,
+            quantity: this.quantity
+          }
+        ],
+        refreshCart: () => {
+          this.getData();
+        },
+      },
+    });
+  }
   async postReview() {
     this.btnDisabled = true;
   }
