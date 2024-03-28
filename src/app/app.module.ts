@@ -55,6 +55,10 @@ import { Order } from './modals/order';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
 import { NzTagModule } from 'ng-zorro-antd/tag';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { NzBadgeModule } from 'ng-zorro-antd/badge';
+import { RouterModule } from '@angular/router';
+import { NzResultModule } from 'ng-zorro-antd/result';
 
 registerLocaleData(en);
 
@@ -79,7 +83,7 @@ registerLocaleData(en);
     MyordersComponent,
     OrderdetailsComponent,
     ForgotPWForm,
-    Order
+    Order,
   ],
   imports: [
     BrowserModule,
@@ -90,6 +94,7 @@ registerLocaleData(en);
     ReactiveFormsModule,
     AppRoutingModule,
     NgbModule,
+    RouterModule,
     HttpClientModule,
     NzFormModule,
     NzInputModule,
@@ -111,7 +116,10 @@ registerLocaleData(en);
     NzPopconfirmModule,
     NzDatePickerModule,
     NzPageHeaderModule,
-    NzTagModule
+    NzTagModule,
+    NzTabsModule,
+    NzBadgeModule,
+    NzResultModule
   ],
   providers: [RestApiService, DataService, AuthGuardService,
     { provide: NZ_I18N, useValue: en_US },

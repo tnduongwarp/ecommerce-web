@@ -5,6 +5,9 @@ import { Component, OnInit } from '@angular/core';
 
 import { RestApiService } from '../service/rest-api.service';
 import { DataService } from '../service/data.service';
+import { BaseComponent } from '../base/base.component';
+import { Const } from '../const/const';
+import { ActivatedRoute, Router } from '@angular/router';
 
 //component specific details
 @Component({
@@ -14,22 +17,75 @@ import { DataService } from '../service/data.service';
 })
 
 //exporting orders component
-export class MyordersComponent implements OnInit {
+export class MyordersComponent extends BaseComponent {
 
- myorders: any;
+  public myorders: any = [];
+  public presentTab = null;
+  public isLoading: boolean = true;
+  public OrderTab = [
+    {
+      name: 'Tất cả',
+      total: 0,
+      link:'all'
+    },
+    {
+      name: 'Chờ lấy hàng',
+      total: 0,
+      link:'created'
+    },
+    {
+      name: 'Đang giao hàng',
+      total: 0,
+      link:'inProgress'
+    },
+    {
+      name: 'Hoàn thành',
+      total: 0,
+      link:'completed'
+    }
+  ]
+  constructor(public router : Router, private activatedRoute: ActivatedRoute) {
+    super();
+    if(!this.activatedRoute?.snapshot?.queryParams['tab']){
+      let url = this.router.url;
+      this.router.navigate([url], {queryParams: {tab: 'all'}})
+    }
+  }
 
-  constructor(private data: DataService, private rest: RestApiService) { }
+  override ngOnInit() {
+    this.activatedRoute.queryParams.subscribe(q => {
+      let status = q['tab'];
+      if(status !== this.presentTab){
+        this.presentTab = status;
+        this.getData(q)
+      }
+    })
 
-  async ngOnInit() {
-    try {
-      const data: any = await this.rest.get(
-        'http://localhost:3030/api/accounts/orders'
-      );
-      data['success']
-        ? (this.myorders = data['orders'])
-        : this.data.error(data['message']);
-    } catch (error: any) {
-      this.data.error(error['message']);
+  }
+
+  public getData(q: any){
+    this.isLoading = true;
+    const userId = JSON.parse(localStorage.getItem('user')!)._id;
+    let qs = new URLSearchParams(q).toString();
+    this.api.get(`${Const.API_ORDER}/${userId}?${qs}`).then(
+      (res: any) => {
+        this.myorders = res.data.orderItems;
+        for(let tab of this.OrderTab){
+          tab.total = res.data.sumary[tab.link];
+        }
+        this.isLoading = false
+      }
+    ).catch(err => {
+      console.log(err);
+      this.isLoading = false
+    })
+  }
+
+  public getStatusText(status: string){
+    switch(status){
+      case 'created': return 'Người bán đang chuẩn bị hàng'
+      case 'inProgress': return 'Đang giao hàng'
+      case 'completed': return 'Đã hoàn thành'
     }
   }
 

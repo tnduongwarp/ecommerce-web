@@ -36,7 +36,9 @@
           </div>
         </div>
         <hr class="mt-0">
-        <div *ngFor="let item of cartItems; let i=index;" class="cartItem">
+      <div *ngFor="let order of orderItems; let index=index">
+        <div style="font-size: 17px; color: rgb(60, 60, 226); margin: 0 0 15px 0; font-weight: bold;">Order {{index+1}} - {{order.seller.shopName}}</div>
+        <div *ngFor="let item of order.items; let i=index;" class="cartItem">
           <div class="row">
             <div class="col-4 col-md-2">
               <a routerLink="/product/{{ item.product._id }}">
@@ -63,8 +65,11 @@
               <h6 class="font-weight-bold text-danger">{{ convertNumberToCurrency(item.product.price*item.quantity) }}</h6>
             </div>
           </div>
-          <hr>
+          <nz-divider></nz-divider>
         </div>
+
+        <hr>
+      </div>
       </div>
 
     </div>
@@ -72,7 +77,7 @@
       <div class="card bg-light">
         <div class="card-body">
           <div>
-            <span>Phí vận chuyển: 20.000đ</span>
+            <span>Phí vận chuyển: 20.000đ x {{this.orderItems.length}}</span>
           </div>
           <h5>Tổng thanh toán:
             <span class="ml-1 font-weight-bold text-danger">{{ convertNumberToCurrency(cartTotal) }}</span>

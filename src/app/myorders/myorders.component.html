@@ -1,41 +1,79 @@
 <section id="myOrders">
   <div class="container p-5">
-    <app-message></app-message>
-    <div *ngIf="!myorders" class="m-auto">
-      <h1 class="text-center display-3 mt-5">
-        <i class="fa fa-spinner fa-spin"></i>
-      </h1>
-    </div>
-    <h3 *ngIf="myorders && !myorders.length" class="display-2 text-center mt-5">My Orders is Empty</h3>
-    <div *ngIf="myorders && myorders.length" class="row">
-      <div class="col">
-        <h4 class="display-4">My Orders</h4>
-        <div class="row">
-          <div class="offset-10 col-2 d-none d-md-block">
-            <p>
-              <small class="text-muted">Status</small>
-            </p>
-          </div>
-        </div>
-        <hr class="mt-0">
-        <div *ngFor="let order of myorders" class="order">
-          <div class="row">
-            
-            <div class="col-5 col-md-8">
-              <h5>
-                <a routerLink="/orders/{{ order._id }}">Order #{{ order._id }}</a>
-                <p class="m-0">
-                  <small class="text-muted">Total: {{ order.totalPrice | currency }}</small>
-                </p>
-              </h5>
+    <div  class="row">
+      <nz-tabset nzLinkRouter>
+        <nz-tab *ngFor="let tab of OrderTab" >
+          <a *nzTabLink nz-tab-link [routerLink]="['.']" [queryParams]="{ tab: tab.link }" queryParamsHandling="merge">
+            <nz-badge [nzCount]="tab?.total" [nzOffset]="[10, 0]" [nzOverflowCount]="999" nzShowZero [nzStyle]="{ backgroundColor: '#1b1ac4'}">
+              <span style="font-size: 17px;">{{ tab.name }}</span>
+            </nz-badge>
+          </a>
+          <ng-template nz-tab>
+             <div *ngIf="!isLoading && myorders.length" class="col">
+              <hr class="mt-0">
+              <div *ngFor="let order of myorders" class="order">
+                <div class="">
+                    <div style="display: flex; gap: 20px; font-size: 16px; margin-bottom: 10px;">
+                      <a routerLink="/orders/{{ order._id }}">Order #{{ order._id }}</a>
+                      <p class="m-0">
+                        <span nz-icon nzType="shopping-cart"  style="font-size: 16px; color: rgb(255, 156, 43); margin-right: 5px;" ></span>
+                        <small class="text-muted">{{  order.products[0].product.owner.shopName }} - {{order.products[0].product.owner.shopAddress}}</small>
+                      </p>
+                    </div>
+                    <div style="display: flex;">
+                      <div style="min-width: 70%;padding-right: 20px; border-right: solid 1px #dfdfdf;">
+                        <div *ngFor="let item of order.products let i=index;" class="cartItem">
+                          <div class="row">
+                            <div class="col-4 col-md-2">
+                              <a routerLink="/product/{{ item.product._id }}">
+                                <img src="{{ item.product.image }}" alt="productImage" width="80" height="80">
+                              </a>
+                            </div>
+                            <div class="col-5 col-md-4">
+                              <div>
+                                <a routerLink="/product/{{  item.product._id }}">{{  item.product.title }}</a>
+                                <div>x{{item.quantity}}</div>
+                              </div>
+
+                            </div>
+                            <div class="col" style="display: flex; justify-content: end; align-items: center;">
+                              <h6 class="font-weight-bold text-danger">{{ convertNumberToCurrency(item.product.price*item.quantity) }}</h6>
+                            </div>
+                          </div>
+                          <nz-divider></nz-divider>
+                        </div>
+                      </div>
+                      <div style="min-width: 30%; padding-left: 20px; display: flex; flex-direction: column; gap: 10px; justify-content: center;">
+                        <div>
+                          <b>Thời gian:</b> <span>{{order.created}}</span>
+                        </div>
+                        <p class="m-0">
+                          <b class="text-muted">Total: </b>{{ convertNumberToCurrency(order.totalPrice) }}
+                        </p>
+                        <div style="">
+                          <b>Trạng thái: </b>{{getStatusText(order.status)}}
+                        </div>
+                      </div>
+
+                    </div>
+                </div>
+                <hr>
+              </div>
             </div>
-            <div class="col-2">
-              <h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Processing  </h6>
+            <div *ngIf="isLoading">
+              <div class="m-auto">
+                <h1 class="text-center display-3 mt-5">
+                  <i class="fa fa-spinner fa-spin"></i>
+                </h1>
+              </div>
             </div>
-          </div>
-          <hr>
-        </div>
-      </div>
+            <div *ngIf="!isLoading && !myorders.length">
+              <nz-result nzStatus="404" nzTitle="No Order" >
+              </nz-result>
+            </div>
+          </ng-template>
+        </nz-tab>
+      </nz-tabset>
     </div>
   </div>
 </section>
