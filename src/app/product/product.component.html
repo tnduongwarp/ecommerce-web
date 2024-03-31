@@ -48,6 +48,41 @@
         </div>
       </div>
       <div>
+        <div style="background-color:  rgba(0, 0, 0, .05);
+        box-sizing: border-box;
+        display: flex;
+        margin-top: 25px;
+        max-width: 400px;
+        padding: 15px;
+        border-radius: 5px;"
+        >
+          <a href="">
+            <div style="width: 80px; height: 80px; overflow: hidden;">
+              <img style="border-radius: 50%;
+              height: 100%;
+              width: 100%; border: solid 1px ;" [src]="product.owner.picture" alt="">
+            </div>
+          </a>
+          <div style="display: flex; flex-direction: column; align-items: start; justify-content: space-between; color: rgba(0, 0, 0, .4); padding-left: 25px; flex-grow: 1; ">
+            <div style="    color: rgba(0, 0, 0, .87); font-size: 16px; font-weight: 400; margin: 0; white-space: nowrap;">{{product.owner.shopName}}</div>
+            <div style="display: flex; margin-top: 8px; justify-content: space-around; gap: 15px;">
+              <button nz-button nzType="default" nzDanger (click)="chatWithShop()">
+                <div style="display: flex; justify-content: center; align-items: center; gap: 5px;">
+                  <span nz-icon nzType="message" [nzTheme]="'twotone'" [nzTwotoneColor]="'#eb2f96'" style="font-size: 18px;"></span>
+                  <span>Chat ngay</span>
+                </div>
+              </button>
+              <button nz-button nzType="default" (click)="goToShop()">
+                <div style="display: flex; justify-content: center; align-items: center; gap: 5px;">
+                  <span nz-icon nzType="shop" [nzTheme]="'outline'" style="font-size: 18px;"></span>
+                  <span>Xem Shop</span>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
         <div class="mt-5 ml-lg-5">
           <h4>Đánh giá ({{product?.totalRate || 0}})</h4>
           <hr>
@@ -91,11 +126,3 @@
     </div>
   </div>
 </section>
-
-<ng-template #t let-fill="fill">
-  <span *ngIf="fill === 100" class="star full">&#9733;</span>
-  <span *ngIf="fill === 0" class="star">&#9733;</span>
-  <span *ngIf="fill < 100 && fill > 0" class="star">
-    <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
-  </span>
-</ng-template>

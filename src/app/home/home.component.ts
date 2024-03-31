@@ -7,6 +7,8 @@ import { RestApiService } from '../service/rest-api.service';
 import { BaseComponent } from '../base/base.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Const } from '../const/const';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { ChatComponent } from '../modals/chat/views/chat/chat.component';
 
 //component specific details
 @Component({
@@ -25,7 +27,10 @@ export class HomeComponent extends BaseComponent {
   public pageSize = 12;
   public total: number = 0;
   public skip = 0;
-  constructor(public router : Router, public activatedRoute: ActivatedRoute) {
+  public shop: string = '';
+  public shopInfo: any;
+  constructor(public router : Router, public activatedRoute: ActivatedRoute,
+    private modalService: NzModalService) {
     super();
   }
 
@@ -52,6 +57,13 @@ export class HomeComponent extends BaseComponent {
         if(queryParams?.price) sort.price = queryParams.price;
         if(queryParams?.sortBy) sort.sortBy = queryParams.sortBy;
         condition['sort'] = JSON.stringify(sort);
+      };
+      if(queryParams['shop']) {
+        this.shop = queryParams['shop'];
+        condition['owner'] = queryParams['shop'];;
+        this.getShopInfo()
+      }else{
+        this.shop = '';
       };
       let qs = new URLSearchParams(condition).toString();
       this.isLoading = true;
@@ -107,5 +119,37 @@ export class HomeComponent extends BaseComponent {
     let currentQ = this.queryParams;
     let q = Object.assign({}, currentQ, {page: event});
     this.routeWithQueryUrl(q);
+  }
+
+  public getShopInfo(){
+    if(!this.shop) return;
+    this.api.get(`${Const.API_USER}/shop_info/${this.shop}`).then(
+      (res: any) => {
+        console.log(res);
+        this.shopInfo = res.data;
+      }
+    ).catch(err => console.log(err))
+  }
+
+  public chatWithShop(){
+    let userId = JSON.parse(localStorage.getItem('user')!)._id;
+    this.api.post(`${Const.API_CHAT}/add_receiver/${userId}`, {receiver: this.shopInfo.shop._id})
+    .then((res: any) => {
+      this.modalService.create({
+        nzTitle: 'Chat',
+        nzFooter: null,
+        nzMask: false,
+        nzWidth: 800,
+        nzBodyStyle:{
+          padding: '0',
+        },
+        nzContent: ChatComponent,
+        nzData: {
+          presentReceiver: this.shopInfo.shop._id,
+          receiver: res.data
+        },
+      })
+    })
+    .catch(err => console.log(err))
   }
 }

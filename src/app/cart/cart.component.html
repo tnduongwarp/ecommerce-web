@@ -29,7 +29,7 @@
               <h5>
                 <a routerLink="/product/{{  item.product._id }}">{{  item.product.title }}</a>
               </h5>
-              <p class="m-0">
+              <p class="m-0" style="cursor: pointer;" (click)="goToShop(item.product)">
                 <span nz-icon nzType="shopping-cart"  style="font-size: 16px; color: rgb(255, 156, 43); margin-right: 5px;" ></span>
                 <small class="text-muted">{{  item.product.owner.shopName }} - {{item.product.owner.shopAddress}}</small>
               </p>

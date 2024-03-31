@@ -17,8 +17,8 @@
       <div class="w-100">
         <ul class="navbar-nav">
           <li class="nav-item ml-0 ml-md-auto" style="display: flex;">
-            <a  [routerLink]="['/']" [queryParams]="{product: 'all'}" routerLinkActive="active" class="nav-link category" [ngClass]="{'selected': presentCategory == 'all'}"><span nz-icon nzType="unordered-list" nzTheme="outline"></span><br/><b>All</b></a>
-            <a *ngFor="let item of categories" [routerLink]="['/']" [queryParams]="{product: item.url}" routerLinkActive="active" class="nav-link category" [ngClass]="{'selected': presentCategory == item.url}"><span nz-icon [nzType]="item.icon" nzTheme="outline"></span><br/><span><b>{{getCategoryText(item.name)}}</b></span></a>
+            <a  [routerLink]="['/']" [queryParams]="{product: 'all'}" routerLinkActive="active" queryParamsHandling="merge" class="nav-link category" [ngClass]="{'selected': presentCategory == 'all'}"><span nz-icon nzType="unordered-list" nzTheme="outline"></span><br/><b>All</b></a>
+            <a *ngFor="let item of categories" [routerLink]="['/']" [queryParams]="{product: item.url}" queryParamsHandling="merge" routerLinkActive="active" class="nav-link category" [ngClass]="{'selected': presentCategory == item.url}"><span nz-icon [nzType]="item.icon" nzTheme="outline"></span><br/><span><b>{{getCategoryText(item.name)}}</b></span></a>
           </li>
 
 

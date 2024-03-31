@@ -7,5 +7,5 @@ export class Const {
   public static readonly API_CART_URL = `${this.ORIGIN}/cart`;
   public static readonly API_USER = `${this.ORIGIN}/user`;
   public static readonly API_ORDER = `${this.ORIGIN}/order`;
-
+  public static readonly API_CHAT = `${this.ORIGIN}/chat`;
 }

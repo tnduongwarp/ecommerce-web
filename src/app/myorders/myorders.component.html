@@ -15,10 +15,16 @@
                 <div class="">
                     <div style="display: flex; gap: 20px; font-size: 16px; margin-bottom: 10px;">
                       <a routerLink="/orders/{{ order._id }}">Order #{{ order._id }}</a>
-                      <p class="m-0">
+                      <p class="m-0" style="cursor: pointer;" (click)="goToShop(order.products[0].product)">
                         <span nz-icon nzType="shopping-cart"  style="font-size: 16px; color: rgb(255, 156, 43); margin-right: 5px;" ></span>
                         <small class="text-muted">{{  order.products[0].product.owner.shopName }} - {{order.products[0].product.owner.shopAddress}}</small>
                       </p>
+                      <button nz-button nzSize="small" nzType="default" nzDanger (click)="chatWithShop( order.products[0].product.owner)">
+                        <div style="display: flex; justify-content: center; align-items: center; gap: 5px;">
+                          <span nz-icon nzType="message" [nzTheme]="'twotone'" [nzTwotoneColor]="'#eb2f96'" style="font-size: 14px;"></span>
+                          <span>Chat với shop</span>
+                        </div>
+                      </button>
                     </div>
                     <div style="display: flex;">
                       <div style="min-width: 70%;padding-right: 20px; border-right: solid 1px #dfdfdf;">

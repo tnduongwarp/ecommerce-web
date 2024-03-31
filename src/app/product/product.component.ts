@@ -11,6 +11,7 @@ import { Const } from '../const/const';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { Order } from '../modals/order';
+import { ChatComponent } from '../modals/chat/views/chat/chat.component';
 
 //component specific details
 @Component({
@@ -105,4 +106,29 @@ export class ProductComponent extends BaseComponent {
     this.btnDisabled = true;
   }
 
+  public goToShop(){
+    return this.router.navigate(['/'],{queryParams: {shop: this.product.owner._id}})
+  }
+
+  public chatWithShop(){
+    let userId = JSON.parse(localStorage.getItem('user')!)._id;
+    this.api.post(`${Const.API_CHAT}/add_receiver/${userId}`, {receiver: this.product.owner._id})
+    .then((res: any) => {
+      this.modalService.create({
+        nzTitle: 'Chat',
+        nzFooter: null,
+        nzMask: false,
+        nzWidth: 800,
+        nzBodyStyle:{
+          padding: '0',
+        },
+        nzContent: ChatComponent,
+        nzData: {
+          presentReceiver: this.product.owner._id,
+          receiver: res.data
+        },
+      })
+    })
+    .catch(err => console.log(err))
+  }
 }

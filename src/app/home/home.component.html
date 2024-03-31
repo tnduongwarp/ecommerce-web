@@ -1,5 +1,5 @@
 <section id="home">
-  <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="1000" >
+  <div id="myCarousel"  *ngIf="!shop" class="carousel slide" data-ride="carousel" data-interval="1000" >
     <ngb-carousel>
       <ng-template ngbSlide>
         <img src="assets/img/image1.jpg" alt="first" class="item">
@@ -17,6 +17,47 @@
         <img src="assets/img/image5.jpg" alt="fifth" class="item">
       </ng-template>
     </ngb-carousel>
+  </div>
+  <div *ngIf="shop && shopInfo">
+      <div style="background-color:  rgba(0, 0, 0, .05);
+      padding: 50px 70px; display: flex; gap: 20px;">
+        <div style="max-width: 400px;min-width: 300px;box-sizing: border-box; display: flex; margin-left: 300px;">
+          <div style="width: 80px; height: 80px; overflow: hidden;">
+            <img style="border-radius: 50%;
+            height: 100%;
+            width: 100%; border: solid 1px ;" [src]="shopInfo.shop.picture" alt="">
+          </div>
+          <div style="display: flex; flex-direction: column; align-items: start; justify-content: space-between; color: rgba(0, 0, 0, .4); padding-left: 25px; flex-grow: 1; ">
+            <div style="color: rgba(0, 0, 0, .87); font-size: 25px; font-weight: bold; margin: 0; white-space: nowrap;">{{shopInfo.shop.shopName}}</div>
+            <div style="display: flex; margin-top: 8px; justify-content: space-around; gap: 15px;">
+              <button nz-button nzType="default" nzDanger (click)="chatWithShop()">
+                <div style="display: flex; justify-content: center; align-items: center; gap: 5px;">
+                  <span nz-icon nzType="message" [nzTheme]="'twotone'" [nzTwotoneColor]="'#eb2f96'" style="font-size: 18px;"></span>
+                  <span>Chat ngay</span>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div style="display: flex; font-size: 15px;">
+          <div class="content-col">
+            <div class="content-line">
+              <div class="label"> <span nz-icon nzType="shop" nzTheme="outline"></span>Sản phẩm: </div>
+              <div class="content">{{shopInfo.totalProduct}}</div>
+            </div>
+            <div class="content-line">
+              <div class="label"> <span nz-icon nzType="star" nzTheme="outline"></span>Đánh giá: </div>
+              <div class="content"><span>{{shopInfo.avgRate}} ({{shopInfo.totalReview}})</span></div>
+            </div>
+          </div>
+          <div class="content-col">
+            <div class="content-line">
+              <div class="label"><span nz-icon nzType="user-add" nzTheme="outline"></span>Tham gia: </div>
+              <div class="content" timeago [date]="shopInfo.shop.created"></div>
+            </div>
+          </div>
+        </div>
+      </div>
   </div>
   <div class="container p-5">
     <div class="lead">
@@ -46,6 +87,9 @@
                 <div class="card-text" style="display: flex; justify-content: space-between;">
                   <span style="color: orangered;">{{ convertNumberToCurrency(product.price) }}</span>
                   <span>Đã bán: {{product.sold}}</span>
+                </div>
+                <div>
+                  <img src="/assets/img/location.png" alt="" width="20px" height="15px"> {{ product.owner.shopAddress }}
                 </div>
               </div>
             </div>

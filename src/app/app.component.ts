@@ -6,6 +6,8 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BaseComponent } from './base/base.component';
 import { Const } from './const/const';
+import { TimeagoIntl } from 'ngx-timeago';
+import { strings as vnStrings } from "ngx-timeago/language-strings/vi";
 //Component specific details
 @Component({
   selector: 'app-root',
@@ -20,8 +22,10 @@ export class AppComponent extends BaseComponent{
   public categories = [];
   public presentCategory: string = '';
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, intl: TimeagoIntl) {
     super();
+    intl.strings = vnStrings;
+    intl.changes.next();
     this.data.cartItems = this.data.getCart().length;
     this.data.getProfile();
   }

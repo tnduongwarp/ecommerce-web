@@ -104,4 +104,7 @@ export class CartComponent extends BaseComponent {
       },
     });
   }
+  public goToShop(product: any){
+    return this.router.navigate(['/'],{queryParams: {shop: product.owner._id}})
+  }
 }

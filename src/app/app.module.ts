@@ -59,9 +59,14 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { RouterModule } from '@angular/router';
 import { NzResultModule } from 'ng-zorro-antd/result';
-
+import { TimeagoCustomFormatter, TimeagoFormatter, TimeagoIntl, TimeagoModule } from "ngx-timeago";
+import { ChatComponent } from './modals/chat/views/chat/chat.component';
+import { ChannelComponent } from './modals/chat/views/channel/channel.component';
 registerLocaleData(en);
 
+export class MyIntl extends TimeagoIntl {
+  // do extra stuff here...
+}
 
 @NgModule({
   declarations: [
@@ -84,8 +89,14 @@ registerLocaleData(en);
     OrderdetailsComponent,
     ForgotPWForm,
     Order,
+    ChatComponent,
+    ChannelComponent
   ],
   imports: [
+    TimeagoModule.forRoot({
+      intl: { provide: TimeagoIntl, useClass: MyIntl },
+      formatter: { provide: TimeagoFormatter, useClass: TimeagoCustomFormatter },
+    }),
     BrowserModule,
     BrowserAnimationsModule,
     // NgbModalModule,

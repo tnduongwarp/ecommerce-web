@@ -8,6 +8,8 @@ import { DataService } from '../service/data.service';
 import { BaseComponent } from '../base/base.component';
 import { Const } from '../const/const';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { ChatComponent } from '../modals/chat/views/chat/chat.component';
 
 //component specific details
 @Component({
@@ -44,7 +46,7 @@ export class MyordersComponent extends BaseComponent {
       link:'completed'
     }
   ]
-  constructor(public router : Router, private activatedRoute: ActivatedRoute) {
+  constructor(public router : Router, private activatedRoute: ActivatedRoute, private modalService: NzModalService) {
     super();
     if(!this.activatedRoute?.snapshot?.queryParams['tab']){
       let url = this.router.url;
@@ -89,4 +91,29 @@ export class MyordersComponent extends BaseComponent {
     }
   }
 
+  public goToShop(product: any){
+    return this.router.navigate(['/'],{queryParams: {shop: product.owner._id}})
+  }
+
+  public chatWithShop(shop: any){
+    let userId = JSON.parse(localStorage.getItem('user')!)._id;
+    this.api.post(`${Const.API_CHAT}/add_receiver/${userId}`, {receiver: shop._id})
+    .then((res: any) => {
+      this.modalService.create({
+        nzTitle: 'Chat',
+        nzFooter: null,
+        nzMask: false,
+        nzWidth: 800,
+        nzBodyStyle:{
+          padding: '0',
+        },
+        nzContent: ChatComponent,
+        nzData: {
+          presentReceiver: shop._id,
+          receiver: res.data
+        },
+      })
+    })
+    .catch(err => console.log(err))
+  }
 }

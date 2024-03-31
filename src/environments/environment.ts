@@ -5,5 +5,11 @@
 
 export const environment = {
   production: false,
-  stripeKey: 'pk_test_DVAYtghfj48mnkPlrOV4YD0E'
+  socket: {
+    baseUrl: 'http://localhost:3000',
+    opts: {}
+  },
+  api: {
+    baseUrl: 'http://localhost:3000'
+  }
 };
