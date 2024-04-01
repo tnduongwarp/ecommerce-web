@@ -9,8 +9,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AddressComponent } from './address/address.component';
 import { CartComponent } from './cart/cart.component';
-import { CategoriesComponent } from './categories/categories.component';
-import { CategoryComponent } from './category/category.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { MessageComponent } from './message/message.component';
@@ -21,7 +19,6 @@ import { PostProductComponent } from './post-product/post-product.component';
 import { ProductComponent } from './product/product.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RegistrationComponent } from './registration/registration.component';
-import { SearchComponent } from './search/search.component';
 import { SettingsComponent } from './settings/settings.component';
 import { AuthGuardService } from './service/auth-guard.service';
 import { DataService } from './service/data.service';
@@ -78,12 +75,9 @@ export class MyIntl extends TimeagoIntl {
     ProfileComponent,
     SettingsComponent,
     AddressComponent,
-    CategoriesComponent,
     PostProductComponent,
     MyProductsComponent,
-    CategoryComponent,
     ProductComponent,
-    SearchComponent,
     CartComponent,
     MyordersComponent,
     OrderdetailsComponent,

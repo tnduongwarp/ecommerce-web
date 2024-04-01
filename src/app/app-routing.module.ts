@@ -3,8 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { AddressComponent } from './address/address.component';
 import { AuthGuardService } from './service/auth-guard.service';
 import { CartComponent } from './cart/cart.component';
-import { CategoriesComponent } from './categories/categories.component';
-import { CategoryComponent } from './category/category.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { MyProductsComponent } from './my-products/my-products.component';
@@ -14,7 +12,6 @@ import { PostProductComponent } from './post-product/post-product.component';
 import { ProductComponent } from './product/product.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RegistrationComponent } from './registration/registration.component';
-import { SearchComponent } from './search/search.component';
 import { SettingsComponent } from './settings/settings.component';
 
 const routes: Routes = [
@@ -23,28 +20,19 @@ const routes: Routes = [
     component: HomeComponent,
   },
   {
-    path: 'search',
-    component: SearchComponent,
-  },
-  {
     path: 'cart',
     component: CartComponent,
-  },
-  {
-    path: 'categories',
-    component: CategoriesComponent,
-  },
-  {
-    path: 'categories/:id',
-    component: CategoryComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'product/:id',
     component: ProductComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'orders/:id',
     component: OrderdetailsComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'register',

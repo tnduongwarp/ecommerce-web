@@ -10,13 +10,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 export class ProfileComponent extends BaseComponent {
   public user: any;
-  constructor() {
+  constructor(private router: Router) {
     super();
    }
 
   override ngOnInit() {
      this.user = JSON.parse(localStorage.getItem('user')!);
-     console.log(window.location.pathname.split('/').includes('account'))
+     if(!window.location.pathname.split('/').includes('account'))
+      this.router.navigate(['/profile/account'])
   }
 
   isSelected(item: string){

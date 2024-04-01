@@ -69,7 +69,7 @@ export class MyordersComponent extends BaseComponent {
     this.isLoading = true;
     const userId = JSON.parse(localStorage.getItem('user')!)._id;
     let qs = new URLSearchParams(q).toString();
-    this.api.get(`${Const.API_ORDER}/${userId}?${qs}`).then(
+    this.api.get(`${Const.API_ORDER}/${userId}/list?${qs}`).then(
       (res: any) => {
         this.myorders = res.data.orderItems;
         for(let tab of this.OrderTab){
@@ -103,7 +103,7 @@ export class MyordersComponent extends BaseComponent {
         nzTitle: 'Chat',
         nzFooter: null,
         nzMask: false,
-        nzWidth: 800,
+        nzWidth: 850,
         nzBodyStyle:{
           padding: '0',
         },

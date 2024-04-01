@@ -1,0 +1,82 @@
+:host{
+  .header{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    border-bottom: dashed 1px rgb(218, 218, 218);
+    font-weight: 400;
+    gap: 10px;
+  }
+  .status-history{
+    padding: 40px 20px;
+
+    .stepper{
+      box-sizing: border-box;
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      position: relative;
+
+      .stepper__step{
+        cursor: default;
+        text-align: center;
+        user-select: none;
+        width: 140px;
+        z-index: 1;
+
+        .stepper__step-icon--finish{
+          border-color: #2dc258;
+          color: #2dc258;
+        }
+
+        .stepper__step-icon {
+          align-items: center;
+          background-color: #fff;
+          border: 4px solid #e0e0e0;
+          border-radius: 50%;
+          box-sizing: border-box;
+          color: #e0e0e0;
+          display: flex;
+          flex-direction: column;
+          font-size: 1.875rem;
+          height: 60px;
+          justify-content: center;
+          margin: auto;
+          position: relative;
+          transition: background-color .3s cubic-bezier(.4,0,.2,1) .7s, border-color .3s cubic-bezier(.4,0,.2,1) .7s, color .3s cubic-bezier(.4,0,.2,1) .7s;
+          width: 60px;
+        }
+
+        .stepper__step-icon--finish{
+          border-color: #2dc258;
+          color: #2dc258;
+        }
+        .stepper__step-text{
+          color: rgba(0, 0, 0, .8);
+          font-size: .875rem;
+          line-height: 1.25rem;
+          margin: 1.25rem 0 .25rem;
+          text-transform: capitalize;
+        }
+      }
+      .stepper__line {
+        height: 4px;
+        position: absolute;
+        top: 29px;
+        width: 100%;
+
+        .stepper__line-background, .stepper__line-foreground {
+          box-sizing: border-box;
+          height: 100%;
+          margin: 0 70px;
+          position: absolute;
+          width: calc(100% - 140px);
+        }
+        .stepper__line-foreground {
+          background: #2dc258;
+          transition: width 1s cubic-bezier(.4,0,.2,1);
+        }
+      }
+    }
+  }
+}

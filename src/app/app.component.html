@@ -24,7 +24,8 @@
 
           <li class="nav-item ml-0 ml-md-auto" ngbDropdown #dropdown="ngbDropdown">
             <a class="nav-link dropdown-toggle" ngbDropdownToggle>
-              <i class="fa fa-user mr-1"></i>
+              <i *ngIf="!token" class="fa fa-user mr-1"></i>
+              <img *ngIf="token" [src]="avatar" alt="userimage" style="border-radius: 50%;" width="30px" height="30px">
               <span *ngIf="!token">Tài khoản</span>
               <span *ngIf="data.user">{{ data.user.name }}</span>
             </a>

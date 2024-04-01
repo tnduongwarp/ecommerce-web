@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RestApiService } from '../service/rest-api.service';
 import { DataService } from '../service/data.service';
+import { BaseComponent } from '../base/base.component';
+import { Const } from '../const/const';
 
 //component specific details
 @Component({
@@ -16,39 +18,71 @@ import { DataService } from '../service/data.service';
 })
 
 //exporting OrderDetails component for reuse
-export class OrderdetailsComponent implements OnInit {
+export class OrderdetailsComponent extends BaseComponent {
 
-orderId: any;
-products: any;
-
+  orderId: any;
+  order: any;
+  public isLoading = false;
+  public statusOrder = [
+    {
+      name: 'Đơn Hàng Đã Đặt',
+      iconType: 'profile',
+      linkStatus: 'created'
+    },
+    {
+      name: 'Đơn hàng đã thanh toán',
+      iconType: 'dollar-circle',
+      linkStatus: 'paid'
+    },
+    {
+      name: 'Đã giao cho ĐVVC',
+      iconType: 'car',
+      linkStatus: 'inTransit'
+    },
+    {
+      name: 'Đã nhận được hàng',
+      iconType: 'download',
+      linkStatus: 'getted'
+    },
+    {
+      name: 'Đánh Giá',
+      iconType: 'star',
+      linkStatus: 'needReview'
+    }
+  ]
   constructor(
     private activatedRoute: ActivatedRoute,
-    private data: DataService,
-    private rest: RestApiService,
     private router: Router,
-  ) {}
-
-
-  ngOnInit() {
-    this.activatedRoute.params.subscribe(res => {
-      this.orderId = res['id'];
-      this.getProducts();
-    });
+  ) {
+    super()
   }
 
 
-async getProducts(event?: any) {
-    if (event) {
-      this.products = null;
+  override ngOnInit() {
+    this.orderId = this.activatedRoute.snapshot.params['id'];
+    console.log( this.activatedRoute.snapshot.params)
+    this.getData()
+  }
+
+
+async getData() {
+    if (!this.orderId) {
+      return
     }
     try {
-      const data: any = await this.rest.get(
-        `http://localhost:3030/api/accounts/orders/${this.orderId}`);
-      data['success']
-            ? (this.products = data['order'])
-            : this.data.error(data['message']);
-     this.products=this.products.products;
-    } catch (error: any) {
+      this.isLoading = true;
+      this.api.get(`${Const.API_ORDER}/${this.orderId}`)
+      .then((res: any) => {
+        this.isLoading = false;
+        this.order = res.data;
+        console.log(this.order)
+      })
+      .catch(err => {
+        this.isLoading = false;
+        console.log(err)
+      })
+
+    }catch (error: any) {
       this.data.error(error['message']);
     }
   }

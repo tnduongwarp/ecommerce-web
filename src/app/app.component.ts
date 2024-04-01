@@ -45,6 +45,10 @@ export class AppComponent extends BaseComponent{
     return localStorage.getItem('accessToken');
   }
 
+  get avatar(){
+    return JSON.parse(localStorage.getItem('user')!).picture;
+  }
+
   collapse() {
     this.isCollapsed = true;
   }
@@ -83,7 +87,6 @@ export class AppComponent extends BaseComponent{
     return this.activatedRoute?.snapshot?.queryParams;
   }
   protected routeWithQueryUrl(query: any, replace = false) {
-    console.log(this.queryParams)
     let url = this.router.url.split('?')[0];
     let q = replace ? query : Object.assign({},this.queryParams || {}, query);
     this.router.navigate([url], { queryParams: q });

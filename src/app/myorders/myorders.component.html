@@ -10,9 +10,8 @@
           </a>
           <ng-template nz-tab>
              <div *ngIf="!isLoading && myorders.length" class="col">
-              <hr class="mt-0">
               <div *ngFor="let order of myorders" class="order">
-                <div class="">
+                <div style="padding:15px; background-color: rgb(245, 240, 240);margin-bottom: 15px;">
                     <div style="display: flex; gap: 20px; font-size: 16px; margin-bottom: 10px;">
                       <a routerLink="/orders/{{ order._id }}">Order #{{ order._id }}</a>
                       <p class="m-0" style="cursor: pointer;" (click)="goToShop(order.products[0].product)">
@@ -56,14 +55,13 @@
                         <p class="m-0">
                           <b class="text-muted">Total: </b>{{ convertNumberToCurrency(order.totalPrice) }}
                         </p>
-                        <div style="">
+                        <div>
                           <b>Trạng thái: </b>{{getStatusText(order.status)}}
                         </div>
                       </div>
 
                     </div>
                 </div>
-                <hr>
               </div>
             </div>
             <div *ngIf="isLoading">

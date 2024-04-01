@@ -118,7 +118,7 @@ export class ProductComponent extends BaseComponent {
         nzTitle: 'Chat',
         nzFooter: null,
         nzMask: false,
-        nzWidth: 800,
+        nzWidth: 850,
         nzBodyStyle:{
           padding: '0',
         },
