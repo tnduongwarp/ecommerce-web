@@ -12,16 +12,16 @@
         </div>
         <div style="width: 1px; height: 15px; background-color: grey;"></div>
         <div style="color: orange; font-weight: 500;">
-          {{order.status}}
+          {{getTextStatus(order.status)}}
         </div>
       </div>
       <div class="status-history">
         <div class="stepper">
           <div class="stepper__step" *ngFor="let item of  statusOrder">
-            <div class="stepper__step-icon stepper__step-icon--finish">
+            <div class="stepper__step-icon " [ngClass]="{'stepper__step-icon--finish': checkStatusFinish(item.linkStatus, order.statusHistory)}">
               <span nz-icon [nzType]="item.iconType" nzTheme="outline"></span>
             </div>
-            <div class="stepper__step-text">Đơn hàng đã đặt</div>
+            <div class="stepper__step-text">{{item.name}}</div>
             <div class="stepper__step-date">00:49 26-03-2024</div>
           </div>
           <!-- <div class="stepper__step">
@@ -61,7 +61,7 @@
           </div> -->
           <div class="stepper__line">
             <div class="stepper__line-background" style="background: rgb(224, 224, 224);"></div>
-            <div class="stepper__line-foreground" style="width: calc(100% - 552px); background: rgb(45, 194, 88);"></div>
+            <div id="line-progress" class="stepper__line-foreground" style="width: calc(0% - 30px); background: rgb(45, 194, 88);"></div>
           </div>
         </div>
       </div>

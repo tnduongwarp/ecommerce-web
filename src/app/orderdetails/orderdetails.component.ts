@@ -23,7 +23,8 @@ export class OrderdetailsComponent extends BaseComponent {
   orderId: any;
   order: any;
   public isLoading = false;
-  public statusOrder = [
+  public statusOrder: any;
+  public statusorderPaymentType2 = [
     {
       name: 'Đơn Hàng Đã Đặt',
       iconType: 'profile',
@@ -49,6 +50,33 @@ export class OrderdetailsComponent extends BaseComponent {
       iconType: 'star',
       linkStatus: 'needReview'
     }
+  ];
+  public statusorderPaymentType1 = [
+    {
+      name: 'Đơn Hàng Đã Đặt',
+      iconType: 'profile',
+      linkStatus: 'created'
+    },
+    {
+      name: 'Đã giao cho ĐVVC',
+      iconType: 'car',
+      linkStatus: 'inTransit'
+    },
+    {
+      name: 'Đã nhận được hàng',
+      iconType: 'download',
+      linkStatus: 'getted'
+    },
+    {
+      name: 'Đơn hàng đã thanh toán',
+      iconType: 'dollar-circle',
+      linkStatus: 'paid'
+    },
+    {
+      name: 'Đánh Giá',
+      iconType: 'star',
+      linkStatus: 'needReview'
+    }
   ]
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -61,7 +89,7 @@ export class OrderdetailsComponent extends BaseComponent {
   override ngOnInit() {
     this.orderId = this.activatedRoute.snapshot.params['id'];
     console.log( this.activatedRoute.snapshot.params)
-    this.getData()
+    this.getData();
   }
 
 
@@ -75,7 +103,22 @@ async getData() {
       .then((res: any) => {
         this.isLoading = false;
         this.order = res.data;
-        console.log(this.order)
+        if(this.order.paymentType ===1) this.statusOrder = this.statusorderPaymentType1;
+        else this.statusOrder = this.statusorderPaymentType2
+        console.log(this.order);
+       setTimeout(() => {
+        let index = 0;
+        for(let i = 0; i< this.statusOrder.length; i++){
+          if(this.statusOrder[i].linkStatus === this.order.status){
+            index = i;
+            break;
+          };
+        }
+        const cssString = `calc(${index*25}% - 30px)`
+        let line  = document.getElementById('line-progress');
+        line?.style.setProperty('width', cssString)
+        console.log(line);
+       },1)
       })
       .catch(err => {
         this.isLoading = false;
@@ -85,6 +128,17 @@ async getData() {
     }catch (error: any) {
       this.data.error(error['message']);
     }
+  }
+
+  getTextStatus(status: string){
+    let tmp = this.statusOrder.find((it: any) => (it.linkStatus === status));
+    return tmp?.name.toUpperCase()
+  }
+
+  checkStatusFinish(status: string, statusHistory: any){
+    let sth = statusHistory.find((it: any) => (it.status === status));
+    if(sth && sth?.when) return true;
+    return false;
   }
 
 }
