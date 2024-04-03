@@ -79,4 +79,75 @@
       }
     }
   }
+
+  .border-top{
+    background-image: repeating-linear-gradient(45deg, #6fa6d6, #6fa6d6 33px, transparent 0, transparent 41px, #f18d9b 0, #f18d9b 74px, transparent 0, transparent 82px);
+      background-position-x: -30px;
+      background-size: 116px 3px;
+      height: 3px;
+      width: 100%;
+   }
+
+   .header-orderdetail{
+    align-items: flex-end;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 0 12px;
+
+    .header-content{
+      color: rgba(0, 0, 0, .8);
+      font-size: 20px;
+      line-height: 24px;
+      text-transform: capitalize;
+      }
+   }
+
+   .timeline-route{
+    display: flex;
+
+    .info{
+      flex: 1;
+      line-height: 22px;
+      max-width: 100%;
+      padding: 10px 24px 0 0;
+
+      .name{
+        color: rgba(0, 0, 0, .8);
+        margin: 0 0 7px;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .phone-address{
+        color: rgba(0, 0, 0, .54);
+        font-size: 12px;
+        white-space: pre-line;
+      }
+    }
+
+    .history{
+      border-left: 1px solid rgba(0, 0, 0, .09);
+      padding: 4px 0 0 12px;
+      width: 620px;
+    }
+   }
+
+   .product{
+    margin-top: 30px;
+   }
+
+   ::ng-deep .ant-timeline.ant-timeline-label .ant-timeline-item-tail {
+    left: 30%
+   }
+   ::ng-deep .ant-timeline.ant-timeline-label .ant-timeline-item-head{
+    left: 30%
+   }
+   ::ng-deep .ant-timeline.ant-timeline-label .ant-timeline-item-label {
+    width: calc(30% - 12px);
+   }
+   ::ng-deep .ant-timeline.ant-timeline-label .ant-timeline-item-left .ant-timeline-item-content{
+    left: calc(30% - 4px);
+    width: calc(50% - 14px);
+   }
 }

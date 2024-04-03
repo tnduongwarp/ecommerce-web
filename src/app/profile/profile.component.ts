@@ -16,7 +16,8 @@ export class ProfileComponent extends BaseComponent {
 
   override ngOnInit() {
      this.user = JSON.parse(localStorage.getItem('user')!);
-     if(!window.location.pathname.split('/').includes('account'))
+     console.log(window.location.pathname)
+     if(window.location.pathname === '/profile')
       this.router.navigate(['/profile/account'])
   }
 

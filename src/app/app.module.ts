@@ -59,6 +59,9 @@ import { NzResultModule } from 'ng-zorro-antd/result';
 import { TimeagoCustomFormatter, TimeagoFormatter, TimeagoIntl, TimeagoModule } from "ngx-timeago";
 import { ChatComponent } from './modals/chat/views/chat/chat.component';
 import { ChannelComponent } from './modals/chat/views/channel/channel.component';
+import { NzTimelineModule } from 'ng-zorro-antd/timeline';
+import { ReviewModal } from './modals/review';
+
 registerLocaleData(en);
 
 export class MyIntl extends TimeagoIntl {
@@ -84,7 +87,8 @@ export class MyIntl extends TimeagoIntl {
     ForgotPWForm,
     Order,
     ChatComponent,
-    ChannelComponent
+    ChannelComponent,
+    ReviewModal
   ],
   imports: [
     TimeagoModule.forRoot({
@@ -124,7 +128,8 @@ export class MyIntl extends TimeagoIntl {
     NzTagModule,
     NzTabsModule,
     NzBadgeModule,
-    NzResultModule
+    NzResultModule,
+    NzTimelineModule
   ],
   providers: [RestApiService, DataService, AuthGuardService,
     { provide: NZ_I18N, useValue: en_US },

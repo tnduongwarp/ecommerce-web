@@ -13,7 +13,7 @@
               <div *ngFor="let order of myorders" class="order">
                 <div style="padding:15px; background-color: rgb(245, 240, 240);margin-bottom: 15px;">
                     <div style="display: flex; gap: 20px; font-size: 16px; margin-bottom: 10px;">
-                      <a routerLink="/orders/{{ order._id }}">Order #{{ order._id }}</a>
+                      <a routerLink="/orders/{{ order._id }}">Order {{ order._id }}</a>
                       <p class="m-0" style="cursor: pointer;" (click)="goToShop(order.products[0].product)">
                         <span nz-icon nzType="shopping-cart"  style="font-size: 16px; color: rgb(255, 156, 43); margin-right: 5px;" ></span>
                         <small class="text-muted">{{  order.products[0].product.owner.shopName }} - {{order.products[0].product.owner.shopAddress}}</small>
@@ -50,7 +50,7 @@
                       </div>
                       <div style="min-width: 30%; padding-left: 20px; display: flex; flex-direction: column; gap: 10px; justify-content: center;">
                         <div>
-                          <b>Thời gian:</b> <span>{{order.created}}</span>
+                          <b>Thời gian:</b> <span>{{formatDate(order.created)}}</span>
                         </div>
                         <p class="m-0">
                           <b class="text-muted">Total: </b>{{ convertNumberToCurrency(order.totalPrice) }}

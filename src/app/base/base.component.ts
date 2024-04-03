@@ -3,6 +3,7 @@ import { RestApiService } from '../service/rest-api.service';
 import { DataService } from '../service/data.service';
 import { Router } from '@angular/router';
 import { getInjector } from '../service/injector';
+import { format } from 'date-fns';
 
 @Directive({
   standalone: true,
@@ -41,5 +42,10 @@ export class BaseComponent implements OnChanges, OnInit, DoCheck, AfterContentIn
   }
   public convertNumberToCurrency(x: number){
     return x.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
+  }
+
+  protected  formatDate(day: string){
+    let date = new Date(day);
+    return format(date, 'hh:mm dd-MM-yyyy')
   }
 }
