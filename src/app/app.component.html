@@ -27,14 +27,14 @@
               <i *ngIf="!token" class="fa fa-user mr-1"></i>
               <img *ngIf="token" [src]="avatar" alt="userimage" style="border-radius: 50%;" width="30px" height="30px">
               <span *ngIf="!token">Tài khoản</span>
-              <span *ngIf="data.user">{{ data.user.name }}</span>
+              <span style="margin-left: 10px;" *ngIf="user">{{user?.name || user?.firstname + ' ' + user?.lastname }}</span>
             </a>
             <div ngbDropdownMenu class="dropdown-menu">
               <a *ngIf="token" (click)="closeDropdown(dropdown);collapse();" routerLink="/profile" class="dropdown-item">
                 <i class="fa fa-user-circle" aria-hidden="true"></i> Hồ sơ
               </a>
               <a *ngIf="!token" (click)="closeDropdown(dropdown);collapse();" routerLink="/login" class="dropdown-item">
-                <i class="fa fa-key" aria-hidden="true"></i> Dăng nhập
+                <i class="fa fa-key" aria-hidden="true"></i> Đăng nhập
               </a>
               <a *ngIf="token" (click)="closeDropdown(dropdown);collapse();logout();" class="dropdown-item">
                 <i class="fa fa-key" aria-hidden="true"></i> Đăng xuất
@@ -48,7 +48,6 @@
             <a (click)="collapse()" routerLink="/cart" routerLinkActive="active" class="nav-link">
               <i class="fa fa-shopping-cart mr-1"></i>
               Giỏ hàng
-              <span *ngIf="data.cartItems" class="badge badge-warning ml-1">{{ data.cartItems }}</span>
             </a>
           </li>
         </ul>

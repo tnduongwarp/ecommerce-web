@@ -2,7 +2,6 @@
 
 //including the required files and services
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../service/data.service';
 import { RestApiService } from '../service/rest-api.service';
 import { BaseComponent } from '../base/base.component';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -69,13 +68,11 @@ export class HomeComponent extends BaseComponent {
       this.isLoading = true;
       this.api.get(`${Const.API_GET_LIST_PRODUCT}`+'?'+qs)
       .then((res: any) => {
-        this.total=50
         console.log(res);
         this.isLoading = false;
-        // this.products = res.list_data;
         this.skip = res.skip;
         this.total = res.total;
-        this.products = [...res.list_data,...res.list_data,...res.list_data,...res.list_data,...res.list_data];
+        this.products = res.list_data;
       })
       .catch(err => console.log(err))
     });

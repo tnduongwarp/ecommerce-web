@@ -45,4 +45,7 @@ export class ChatComponent extends BaseComponent {
     this.receiver = receiver;
     this.presentReceiver = receiver.user
   }
+  isSelected(receiver: any){
+    return receiver?._id.toString() == this.presentReceiver.toString()
+  }
 }

@@ -5,10 +5,8 @@ import { AuthGuardService } from './service/auth-guard.service';
 import { CartComponent } from './cart/cart.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
-import { MyProductsComponent } from './my-products/my-products.component';
 import { MyordersComponent } from './myorders/myorders.component';
 import { OrderdetailsComponent } from './orderdetails/orderdetails.component';
-import { PostProductComponent } from './post-product/post-product.component';
 import { ProductComponent } from './product/product.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RegistrationComponent } from './registration/registration.component';
@@ -57,16 +55,6 @@ const routes: Routes = [
       {
         path: 'address',
         component: AddressComponent,
-        canActivate: [AuthGuardService],
-      },
-      {
-        path: 'postproduct',
-        component: PostProductComponent,
-        canActivate: [AuthGuardService],
-      },
-      {
-        path: 'myproducts',
-        component: MyProductsComponent,
         canActivate: [AuthGuardService],
       },
       {

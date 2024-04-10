@@ -11,17 +11,13 @@ import { AddressComponent } from './address/address.component';
 import { CartComponent } from './cart/cart.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
-import { MessageComponent } from './message/message.component';
-import { MyProductsComponent } from './my-products/my-products.component';
 import { MyordersComponent } from './myorders/myorders.component';
 import { OrderdetailsComponent } from './orderdetails/orderdetails.component';
-import { PostProductComponent } from './post-product/post-product.component';
 import { ProductComponent } from './product/product.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { SettingsComponent } from './settings/settings.component';
 import { AuthGuardService } from './service/auth-guard.service';
-import { DataService } from './service/data.service';
 import { RestApiService } from './service/rest-api.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { setInjector } from './service/injector';
@@ -61,6 +57,7 @@ import { ChatComponent } from './modals/chat/views/chat/chat.component';
 import { ChannelComponent } from './modals/chat/views/channel/channel.component';
 import { NzTimelineModule } from 'ng-zorro-antd/timeline';
 import { ReviewModal } from './modals/review';
+import { ReceiverComponent } from './modals/chat/views/receiver/receiver.component';
 
 registerLocaleData(en);
 
@@ -72,14 +69,11 @@ export class MyIntl extends TimeagoIntl {
   declarations: [
     AppComponent,
     HomeComponent,
-    MessageComponent,
     RegistrationComponent,
     LoginComponent,
     ProfileComponent,
     SettingsComponent,
     AddressComponent,
-    PostProductComponent,
-    MyProductsComponent,
     ProductComponent,
     CartComponent,
     MyordersComponent,
@@ -88,7 +82,8 @@ export class MyIntl extends TimeagoIntl {
     Order,
     ChatComponent,
     ChannelComponent,
-    ReviewModal
+    ReviewModal,
+    ReceiverComponent
   ],
   imports: [
     TimeagoModule.forRoot({
@@ -131,7 +126,7 @@ export class MyIntl extends TimeagoIntl {
     NzResultModule,
     NzTimelineModule
   ],
-  providers: [RestApiService, DataService, AuthGuardService,
+  providers: [RestApiService, AuthGuardService,
     { provide: NZ_I18N, useValue: en_US },
     {
       provide: HTTP_INTERCEPTORS,

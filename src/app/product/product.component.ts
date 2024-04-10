@@ -4,7 +4,6 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ActivatedRoute, Router } from '@angular/router';
-import { DataService } from '../service/data.service';
 import { RestApiService } from '../service/rest-api.service';
 import { BaseComponent } from '../base/base.component';
 import { Const } from '../const/const';
@@ -51,7 +50,6 @@ export class ProductComponent extends BaseComponent {
         console.log(this.product)
         let formattedStr = this.product.description.replace(/\n/g, '<br>');
         let description = document.getElementById('description')|| null;
-        console.log(description)
         description!.innerHTML = formattedStr;
       }, 2)
     })

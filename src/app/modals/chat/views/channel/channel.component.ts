@@ -50,10 +50,13 @@ export class ChannelComponent extends BaseComponent {
     this.socket.on('receive_message', (data: any) => {
       console.log(data)
       if((data.receiver.toString() === this.receiver.toString() && data.owner.toString() === this.owner.toString()) || (data.receiver.toString() === this.owner.toString() && data.owner.toString() === this.receiver.toString())){
-        this.msgList.push(data);
-        setTimeout(() => {
-          this.scrollToBottom()
-        },2)
+        let exist = this.msgList.filter((it: any) => it._id.toString() === data._id.toString());
+        if(!exist.length){
+          this.msgList.push(data);
+          setTimeout(() => {
+            this.scrollToBottom()
+          },2)
+        }
       }
     })
   }
@@ -70,6 +73,10 @@ export class ChannelComponent extends BaseComponent {
 
   getReceiverName(user: any){
     if(user.isSeller) return user.shopName;
-    return user.firstname + ' ' + user.lastname;
+    return user?.name || user?.firstname + ' ' + user?.lastname;
+  }
+  override ngOnDestroy(){
+    this.socket.disconnect();
+    // this.socket.off()
   }
 }

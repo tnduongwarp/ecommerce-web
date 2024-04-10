@@ -4,7 +4,6 @@
 import { Component, OnInit } from '@angular/core';
 
 import { RestApiService } from '../service/rest-api.service';
-import { DataService } from '../service/data.service';
 import { BaseComponent } from '../base/base.component';
 import { Const } from '../const/const';
 import { ActivatedRoute, Router } from '@angular/router';

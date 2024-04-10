@@ -1,6 +1,5 @@
 import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, Component, Directive, DoCheck, Injector, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { RestApiService } from '../service/rest-api.service';
-import { DataService } from '../service/data.service';
 import { Router } from '@angular/router';
 import { getInjector } from '../service/injector';
 import { format } from 'date-fns';
@@ -12,14 +11,12 @@ import { format } from 'date-fns';
 export class BaseComponent implements OnChanges, OnInit, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestroy{
 
   protected api: RestApiService;
-  protected data: DataService;
   protected injector: Injector;
 
   public authApiUrl: string ='auth'
   constructor(){
     this.injector = getInjector()
     this.api = this.injector.get(RestApiService);
-    this.data = this.injector.get(DataService);
   }
   ngOnDestroy(): void {
   }

@@ -6,7 +6,6 @@ import { Component, OnInit } from '@angular/core';
 import format from 'date-fns/format';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RestApiService } from '../service/rest-api.service';
-import { DataService } from '../service/data.service';
 import { BaseComponent } from '../base/base.component';
 import { Const } from '../const/const';
 import { NzModalService } from 'ng-zorro-antd/modal';
@@ -132,7 +131,7 @@ async getData() {
       })
 
     }catch (error: any) {
-      this.data.error(error['message']);
+      console.log(error)
     }
   }
 

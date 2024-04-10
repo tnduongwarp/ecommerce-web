@@ -66,22 +66,6 @@ export class CartComponent extends BaseComponent {
       .catch(err => console.log(err))
     }
   }
-  validate() {
-    if (!this.quantities.every((data: any) => data > 0)) {
-      this.data.warning('Quantity cannot be less than one.');
-    } else if (!localStorage.getItem('token')) {
-      this.router.navigate(['/login']).then(() => {
-        this.data.warning('You need to login before making a purchase.');
-      });
-    } else if (!this.data.user['address']) {
-      this.router.navigate(['/profile/address']).then(() => {
-        this.data.warning('You need to login before making a purchase.');
-      });
-    } else {
-      this.data.message = '';
-      return true;
-    }
-  }
 
   checkout() {
     console.log(this.cartItems)

@@ -26,8 +26,7 @@ export class AppComponent extends BaseComponent{
     super();
     intl.strings = vnStrings;
     intl.changes.next();
-    this.data.cartItems = this.data.getCart().length;
-    this.data.getProfile();
+    
   }
 
   override ngOnInit(): void {
@@ -45,6 +44,9 @@ export class AppComponent extends BaseComponent{
     return localStorage.getItem('accessToken');
   }
 
+  get user(){
+    return JSON.parse(localStorage.getItem('user')!)
+  }
   get avatar(){
     return JSON.parse(localStorage.getItem('user')!).picture;
   }
@@ -64,8 +66,6 @@ export class AppComponent extends BaseComponent{
     this.api.post(this.apiUrl(this.authApiUrl)+'logout',bodyLogout)
     .then((res: any) => {
       if(!res.error){
-        this.data.user = {};
-        this.data.cartItems = 0;
         localStorage.clear();
         this.router.navigate(['']);
       }
