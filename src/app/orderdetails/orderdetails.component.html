@@ -64,6 +64,10 @@
             </div>
           </button>
         </div>
+        <div *ngIf="order.note">
+          <span style="color: red;">*Note: </span>
+          <span>{{order.note}}</span>
+        </div>
         <nz-divider></nz-divider>
         <div style="display: flex; gap: 10px; align-items: start;">
           <div style="width: 70%;padding-right: 20px; border-right: solid 1px #dfdfdf;">

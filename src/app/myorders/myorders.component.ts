@@ -71,6 +71,7 @@ export class MyordersComponent extends BaseComponent {
     this.api.get(`${Const.API_ORDER}/${userId}/list?${qs}`).then(
       (res: any) => {
         this.myorders = res.data.orderItems;
+        console.log(this.myorders)
         for(let tab of this.OrderTab){
           tab.total = res.data.sumary[tab.link];
         }

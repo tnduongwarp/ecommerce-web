@@ -65,9 +65,13 @@
               <h6 class="font-weight-bold text-danger">{{ convertNumberToCurrency(item.product.price*item.quantity) }}</h6>
             </div>
           </div>
+
           <nz-divider></nz-divider>
         </div>
-
+        <div style="display: flex; gap: 10px; align-items: center;">
+          <div style="font-weight: 500; min-width: 150px;">Ghi chú cho cửa hàng</div>
+          <input nz-input type="text" placeholder="Điền ghi chú..." [(ngModel)]="note[index]">
+        </div>
         <hr>
       </div>
       </div>

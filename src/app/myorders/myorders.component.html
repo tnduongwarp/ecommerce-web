@@ -1,6 +1,5 @@
 <section id="myOrders">
   <div class="container p-5">
-    <div  class="row">
       <nz-tabset nzLinkRouter>
         <nz-tab *ngFor="let tab of OrderTab" >
           <a *nzTabLink nz-tab-link [routerLink]="['.']" [queryParams]="{ tab: tab.link }" queryParamsHandling="merge">
@@ -9,7 +8,7 @@
             </nz-badge>
           </a>
           <ng-template nz-tab>
-             <div *ngIf="!isLoading && myorders.length" class="col">
+             <div *ngIf="!isLoading && myorders.length" style="height: 800px; overflow: auto;">
               <div *ngFor="let order of myorders" class="order">
                 <div style="padding:15px; background-color: rgb(245, 240, 240);margin-bottom: 15px;">
                     <div style="display: flex; gap: 20px; font-size: 16px; margin-bottom: 10px;">
@@ -46,6 +45,7 @@
                             </div>
                           </div>
                           <nz-divider></nz-divider>
+
                         </div>
                       </div>
                       <div style="min-width: 30%; padding-left: 20px; display: flex; flex-direction: column; gap: 10px; justify-content: center;">
@@ -61,7 +61,12 @@
                       </div>
 
                     </div>
+                    <div *ngIf="order.note">
+                      <span style="color: red; font-weight: 500; margin-right: 10px;">*Note: </span>
+                      <span style="color: rgb(231, 81, 22);">{{order.note}}</span>
+                    </div>
                 </div>
+
               </div>
             </div>
             <div *ngIf="isLoading">
@@ -78,6 +83,5 @@
           </ng-template>
         </nz-tab>
       </nz-tabset>
-    </div>
   </div>
 </section>

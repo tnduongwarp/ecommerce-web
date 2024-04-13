@@ -78,11 +78,11 @@
         </h1>
       </div> -->
       <ng-container >
-        <div *ngFor="let product of products" class="col-md-3 mb-5" >
+        <div *ngFor="let product of products" class="col-md-3 mb-5">
           <a routerLink="/product/{{ product._id }}">
             <div class="card bg-light hover-move-up">
               <img src="{{ product.imageArray[0] }}" alt="product" class="card-img-top">
-              <div class="card-body">
+              <div class="card-body" >
                 <h5 class="card-title">{{ product.title }}</h5>
                 <div class="card-text" style="display: flex; justify-content: space-between;">
                   <span style="color: orangered;">{{ convertNumberToCurrency(product.price) }}</span>

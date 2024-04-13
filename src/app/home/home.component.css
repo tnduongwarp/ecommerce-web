@@ -44,6 +44,12 @@
   .content{
     color: rgb(226, 83, 39);
   }
+  .card-title{
+    font-size: 15px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
 }
 @keyframes fadeIn {
   0% { opacity: 0; }

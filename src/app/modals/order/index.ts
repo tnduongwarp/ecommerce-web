@@ -23,6 +23,7 @@ export class Order extends BaseComponent {
   public paymentType = 1;
   public refreshCartItem: any;
   public orderItems: any = [];
+  public note: string[] = [];
   constructor(private router: Router,private message: NzMessageService ,@Inject(NZ_MODAL_DATA) public  dataInput: ModalData) {
     super();
     this.orderAddress = JSON.parse(localStorage.getItem('user')!)?.metadata?.defaultAddress || JSON.parse(localStorage.getItem('user')!)?.address[0];
@@ -61,6 +62,7 @@ export class Order extends BaseComponent {
   public groupOrderItem(){
     let owners: any = [];
     for(let item of this.cartItems){
+      this.note.push('')
       if(!owners.includes(item.product.owner._id)) owners.push(item.product.owner._id)
     }
     for(let shop of owners){
@@ -75,6 +77,7 @@ export class Order extends BaseComponent {
   checkout() {
     if(this.paymentType === 1){
       let promises1: any = [];
+      let i = 0;
       for(let order of this.orderItems){
         let body: any = {};
         body['owner'] = JSON.parse(localStorage.getItem('user')!)._id;
@@ -87,7 +90,9 @@ export class Order extends BaseComponent {
           }
         });
         body['paymentType'] = this.paymentType;
-        promises1.push(this.api.post(Const.API_ORDER, body))
+        body['note'] = this.note[i];
+        promises1.push(this.api.post(Const.API_ORDER, body));
+        i++;
       }
       Promise.all(promises1)
       .then(datas => {

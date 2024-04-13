@@ -74,6 +74,9 @@ export class CartComponent extends BaseComponent {
       nzFooter: null,
       nzWidth: '100%',
       nzMaskClosable: false,
+      nzStyle:{
+        top:'0'
+      },
       nzBodyStyle: {
         'height': '100%',
         'top': '0',
