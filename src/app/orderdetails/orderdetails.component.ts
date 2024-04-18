@@ -205,7 +205,7 @@ async getData() {
   }
 
   isReviewDisabled(){
-    return this.order.status === 'completed'
+    return this.order.status !== 'getted'
   }
 
 }
