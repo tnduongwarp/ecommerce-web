@@ -59,6 +59,10 @@ import { NzTimelineModule } from 'ng-zorro-antd/timeline';
 import { ReviewModal } from './modals/review';
 import { ReceiverComponent } from './modals/chat/views/receiver/receiver.component';
 
+import { AngularFireModule } from '@angular/fire/compat';
+// import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { environment } from '../environments/environment';
 registerLocaleData(en);
 
 export class MyIntl extends TimeagoIntl {
@@ -124,7 +128,10 @@ export class MyIntl extends TimeagoIntl {
     NzTabsModule,
     NzBadgeModule,
     NzResultModule,
-    NzTimelineModule
+    NzTimelineModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    // AngularFireDatabaseModule,
+    AngularFireStorageModule
   ],
   providers: [RestApiService, AuthGuardService,
     { provide: NZ_I18N, useValue: en_US },
