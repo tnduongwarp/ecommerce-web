@@ -152,7 +152,7 @@ async getData() {
   getPaymentTypeText(){
     switch(this.order.paymentType){
       case 1: return 'Thanh toán khi nhận hàng';
-      case 2: return 'Thanh toán qua Paypal'
+      case 2: return 'Thanh toán qua VNPay'
     }
   }
 
@@ -205,7 +205,7 @@ async getData() {
   }
 
   isReviewDisabled(){
-    return this.order.status !== 'getted'
+    return this.order.status !== 'getted' && this.order.status !== 'needReview'
   }
 
 }

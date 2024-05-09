@@ -53,7 +53,7 @@
 
   <div *ngIf="!isEditting" style="margin-left: 9%;">
     <label nz-label style="margin-right: 20px; font-weight: bold;color: #a7a1a1;">Mặc định: </label>
-    <nz-select  [(ngModel)]="defaultAddr" (ngModelChange)="changeDefaultAddress($event)">
+    <nz-select nzPlaceHolder="Chọn địa chỉ mặc định" [(ngModel)]="defaultAddr" (ngModelChange)="changeDefaultAddress($event)">
       <nz-option *ngFor="let item of address" [nzValue]="item" [nzLabel]="item"></nz-option>
     </nz-select>
   </div>

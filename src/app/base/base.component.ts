@@ -47,7 +47,7 @@ export class BaseComponent implements OnChanges, OnInit, DoCheck, AfterContentIn
   }
   getFileNameFromFileUrl(url: string){
     let part1 = url?.split('?')[0];
-    let name = part1.split('%2F');
+    let name = part1?.split('%2F') || [];
     if(name.length!=2) return ''
     return name[1]
   }

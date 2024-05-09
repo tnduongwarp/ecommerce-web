@@ -4,6 +4,7 @@ import { BaseComponent } from '../base/base.component';
 import { FormGroup, FormControl, Validators, NonNullableFormBuilder } from '@angular/forms';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { ForgotPWForm } from '../modals/forgot-pw';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ import { ForgotPWForm } from '../modals/forgot-pw';
 })
 
 export class LoginComponent extends BaseComponent {
-  constructor(public router: Router,private fb: NonNullableFormBuilder, private modalService: NzModalService) {
+  constructor(public router: Router,private fb: NonNullableFormBuilder, private modalService: NzModalService, private message: NzMessageService) {
     super();
   }
   public isLoading: boolean = false;
@@ -47,7 +48,8 @@ export class LoginComponent extends BaseComponent {
         }
       })
       .catch(err => {
-        console.log(err)
+        console.log(err);
+        this.message.error(err.error.message)
       })
 
     } else {

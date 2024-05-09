@@ -28,6 +28,7 @@ export class HomeComponent extends BaseComponent {
   public skip = 0;
   public shop: string = '';
   public shopInfo: any;
+  public carouselImage: any = [];
   constructor(public router : Router, public activatedRoute: ActivatedRoute,
     private modalService: NzModalService) {
     super();
@@ -77,7 +78,19 @@ export class HomeComponent extends BaseComponent {
       .catch(err => console.log(err))
     });
 
-
+    this.api.get(`${Const.API_SELLER}/bids/accepted`).then(
+      (res: any) => {
+        for(let bid of res.data){
+          bid.products.forEach((it: any) => {
+            this.carouselImage.push({image: it.image, id: it.productId})
+          })
+        }
+        if(!this.carouselImage.length) this.carouselImage = Const.carouseImage;
+      }
+    ).catch(err => {
+      console.log(err)
+      this.carouselImage = Const.carouseImage
+    })
   }
 
   public get queryParams(){
@@ -148,5 +161,9 @@ export class HomeComponent extends BaseComponent {
       })
     })
     .catch(err => console.log(err))
+  }
+
+  public navigateToProduct(item: any){
+    if(item.id) this.router.navigateByUrl(`/product/${item.id}`)
   }
 }

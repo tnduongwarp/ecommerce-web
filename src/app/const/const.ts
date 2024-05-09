@@ -8,4 +8,14 @@ export class Const {
   public static readonly API_USER = `${this.ORIGIN}/user`;
   public static readonly API_ORDER = `${this.ORIGIN}/order`;
   public static readonly API_CHAT = `${this.ORIGIN}/chat`;
+  public static readonly API_SELLER = `${this.ORIGIN}/seller`;
+  public static readonly API_VNPAY = `${this.ORIGIN}/create_payment_url`;
+
+  public static readonly carouseImage = [
+    "assets/img/image1.jpg",
+    "assets/img/image2.jpg",
+    "assets/img/image3.jpg",
+    "assets/img/image4.jpg",
+    "assets/img/image5.jpg"
+  ]
 }

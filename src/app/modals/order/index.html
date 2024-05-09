@@ -10,7 +10,7 @@
           <div>Địa chỉ nhận hàng</div>
         </div>
         <div style="font-size: 17px; display: flex; justify-content: space-between;">
-          <nz-select [(ngModel)]="orderAddress">
+          <nz-select [(ngModel)]="orderAddress" nzPlaceHolder="Chọn địa chỉ nhận hàng">
             <nz-option *ngFor="let item of address" [nzValue]="item" [nzLabel]="item"></nz-option>
           </nz-select>
         </div>

@@ -1,0 +1,7 @@
+{
+  "/create_payment_url": {
+    "target": "https://sandbox.vnpayment.vn",
+    "secure": false,
+    "changeOrigin": true
+  }
+}

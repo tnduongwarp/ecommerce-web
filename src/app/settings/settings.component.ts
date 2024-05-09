@@ -1,6 +1,3 @@
-//setting component.ts - Type Script file that contains code to provide seettings  to elearning application
-
-//including the required files and services
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '../base/base.component';
 import { Const } from '../const/const';
@@ -8,14 +5,12 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { FileUpload } from '../models/file-upload.model';
 import { FileUploadService } from '../service/upload-file.service';
 
-//componnet specific details
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss']
 })
 
-//exporting settings component
 export class SettingsComponent extends BaseComponent {
   public btnDisabled = false;
   public user: any;

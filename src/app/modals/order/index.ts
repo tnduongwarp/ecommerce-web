@@ -2,7 +2,7 @@ import { Component, Inject, Input } from '@angular/core';
 import { BaseComponent } from '../../base/base.component';
 import { Router } from '@angular/router';
 import { Const } from '../../const/const';
-import { NZ_MODAL_DATA } from 'ng-zorro-antd/modal';
+import { NZ_MODAL_DATA, NzModalService } from 'ng-zorro-antd/modal';
 import { NzMessageService } from 'ng-zorro-antd/message';
 export interface ModalData {
   cartItems: string;
@@ -24,7 +24,7 @@ export class Order extends BaseComponent {
   public refreshCartItem: any;
   public orderItems: any = [];
   public note: string[] = [];
-  constructor(private router: Router,private message: NzMessageService ,@Inject(NZ_MODAL_DATA) public  dataInput: ModalData) {
+  constructor(private router: Router,private message: NzMessageService ,@Inject(NZ_MODAL_DATA) public  dataInput: ModalData, private modal: NzModalService) {
     super();
     this.orderAddress = JSON.parse(localStorage.getItem('user')!)?.metadata?.defaultAddress || JSON.parse(localStorage.getItem('user')!)?.address[0];
     this.address = JSON.parse(localStorage.getItem('user')!)?.address;
@@ -75,6 +75,7 @@ export class Order extends BaseComponent {
   }
 
   checkout() {
+    if(!this.orderAddress) return this.message.error('Thông tin địa chỉ đơn hàng bị thiếu, hãy bổ sung trước khi mua hàng')
     if(this.paymentType === 1){
       let promises1: any = [];
       let i = 0;
@@ -108,7 +109,33 @@ export class Order extends BaseComponent {
           }
         )
       })
-      .catch(err => console.log(err))
+      .catch(err => this.message.error(err.error.message))
+    }else{
+      let orders: any = [];
+      let i = 0;
+      for(let order of this.orderItems){
+        let body: any = {};
+        body['owner'] = JSON.parse(localStorage.getItem('user')!)._id;
+        body['address'] = this.orderAddress;
+        body['totalPrice'] = this.countTotalPriceOrder(order.items);
+        body['products'] = order.items.map((item: any) => {
+          return {
+            productId: item.product._id,
+            quantity: item.quantity
+          }
+        });
+        body['paymentType'] = this.paymentType;
+        body['note'] = this.note[i];
+        orders.push(body)
+        i++;
+      }
+      this.api.post(`${Const.API_VNPAY}`,{orders}).then(
+        (res: any) => {
+          window.open(res, '_blank')!.focus();
+          this.refreshCartItem();
+          this.modal.closeAll()
+        }
+      ).catch(err => console.log(err))
     }
   }
 }
