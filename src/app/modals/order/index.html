@@ -90,7 +90,7 @@
           <div>Chọn hình thức thanh toán:</div>
           <nz-radio-group [(ngModel)]="paymentType" nzButtonStyle="solid" style="margin-bottom: 50px;">
             <label nz-radio-button [nzValue]="1">Thanh toán khi nhận hàng</label>
-            <label nz-radio-button [nzValue]="2">Thanh toán qua Paypal</label>
+            <label nz-radio-button [nzValue]="2">Thanh toán qua VNPAY Banking</label>
           </nz-radio-group>
           <button class="btn btn-warning btn-block" (click)="checkout()" [disabled]="btnDisabled">Mua hàng</button>
         </div>

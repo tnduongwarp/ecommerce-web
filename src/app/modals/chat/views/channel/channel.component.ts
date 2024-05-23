@@ -34,7 +34,8 @@ export class ChannelComponent extends BaseComponent {
     }
   }
 
-  override ngOnInit() {
+  override ngOnChanges() {
+    console.log(this.receiverDetail)
     const body = {
       owner: this.owner,
       receiver: this.receiver
