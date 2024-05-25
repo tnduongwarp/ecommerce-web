@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AddressComponent } from './address/address.component';
+import { AddressComponent } from './components/address/address.component';
 import { AuthGuardService } from './service/auth-guard.service';
-import { CartComponent } from './cart/cart.component';
-import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
-import { MyordersComponent } from './myorders/myorders.component';
-import { OrderdetailsComponent } from './orderdetails/orderdetails.component';
-import { ProductComponent } from './product/product.component';
-import { ProfileComponent } from './profile/profile.component';
-import { RegistrationComponent } from './registration/registration.component';
-import { SettingsComponent } from './settings/settings.component';
+import { CartComponent } from './components/cart/cart.component';
+import { HomeComponent } from './components/home/home.component';
+import { LoginComponent } from './components/login/login.component';
+import { MyordersComponent } from './components/myorders/myorders.component';
+import { OrderdetailsComponent } from './components/orderdetails/orderdetails.component';
+import { ProductComponent } from './components/product/product.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { RegistrationComponent } from './components/registration/registration.component';
+import { SettingsComponent } from './components/settings/settings.component';
 
 const routes: Routes = [
   {

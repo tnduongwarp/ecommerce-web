@@ -4,13 +4,13 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ActivatedRoute, Router } from '@angular/router';
-import { RestApiService } from '../service/rest-api.service';
-import { BaseComponent } from '../base/base.component';
-import { Const } from '../const/const';
+import { RestApiService } from '../../service/rest-api.service';
+import { BaseComponent } from '../../base/base.component';
+import { Const } from '../../const/const';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
-import { Order } from '../modals/order';
-import { ChatComponent } from '../modals/chat/views/chat/chat.component';
+import { Order } from '../../modals/order';
+import { ChatComponent } from '../../modals/chat/views/chat/chat.component';
 
 //component specific details
 @Component({

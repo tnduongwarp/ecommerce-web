@@ -2,12 +2,12 @@
 
 //including the required files and services
 import { Component, OnInit } from '@angular/core';
-import { RestApiService } from '../service/rest-api.service';
-import { BaseComponent } from '../base/base.component';
+import { RestApiService } from '../../service/rest-api.service';
+import { BaseComponent } from '../../base/base.component';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Const } from '../const/const';
+import { Const } from '../../const/const';
 import { NzModalService } from 'ng-zorro-antd/modal';
-import { ChatComponent } from '../modals/chat/views/chat/chat.component';
+import { ChatComponent } from '../../modals/chat/views/chat/chat.component';
 
 //component specific details
 @Component({

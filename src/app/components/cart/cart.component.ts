@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { BaseComponent } from '../base/base.component';
+import { BaseComponent } from '../../base/base.component';
 import { Router } from '@angular/router';
-import { Const } from '../const/const';
+import { Const } from '../../const/const';
 import { NzModalService } from 'ng-zorro-antd/modal';
-import { Order } from '../modals/order';
+import { Order } from '../../modals/order';
 import isThisHour from 'date-fns/esm/isThisHour/index.js';
 
 @Component({

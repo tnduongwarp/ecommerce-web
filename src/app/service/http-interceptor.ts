@@ -6,7 +6,7 @@ import {
   HttpErrorResponse,
   HttpClient
 } from '@angular/common/http';
-import { RestApiService } from './service/rest-api.service';
+import { RestApiService } from './rest-api.service';
 import { catchError, switchMap } from 'rxjs/operators';
 import { throwError, Observable } from 'rxjs';
 import { Router } from '@angular/router';

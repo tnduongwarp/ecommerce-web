@@ -5,12 +5,12 @@
 import { Component, OnInit } from '@angular/core';
 import format from 'date-fns/format';
 import { ActivatedRoute, Router } from '@angular/router';
-import { RestApiService } from '../service/rest-api.service';
-import { BaseComponent } from '../base/base.component';
-import { Const } from '../const/const';
+import { RestApiService } from '../../service/rest-api.service';
+import { BaseComponent } from '../../base/base.component';
+import { Const } from '../../const/const';
 import { NzModalService } from 'ng-zorro-antd/modal';
-import { ChatComponent } from '../modals/chat/views/chat/chat.component';
-import { ReviewModal } from '../modals/review';
+import { ChatComponent } from '../../modals/chat/views/chat/chat.component';
+import { ReviewModal } from '../../modals/review';
 
 //component specific details
 @Component({

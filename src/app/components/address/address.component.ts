@@ -5,8 +5,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormRecord, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { BaseComponent } from '../base/base.component';
-import { Const } from '../const/const';
+import { BaseComponent } from '../../base/base.component';
+import { Const } from '../../const/const';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
 

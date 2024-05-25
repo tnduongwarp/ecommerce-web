@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { BaseComponent } from '../base/base.component';
-import { Const } from '../const/const';
+import { BaseComponent } from '../../base/base.component';
+import { Const } from '../../const/const';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { FileUpload } from '../models/file-upload.model';
-import { FileUploadService } from '../service/upload-file.service';
+import { FileUpload } from '../../models/file-upload.model';
+import { FileUploadService } from '../../service/upload-file.service';
 
 @Component({
   selector: 'app-settings',
