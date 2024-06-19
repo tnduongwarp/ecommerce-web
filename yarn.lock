@@ -180,7 +180,7 @@
 
 "@angular/cdk@^16.0.0":
   version "16.2.14"
-  resolved "https://registry.npmjs.org/@angular/cdk/-/cdk-16.2.14.tgz"
+  resolved "https://registry.yarnpkg.com/@angular/cdk/-/cdk-16.2.14.tgz#d26f8f1e7d2466b509e60489b6acf31bfe923acf"
   integrity sha512-n6PrGdiVeSTEmM/HEiwIyg6YQUUymZrb5afaNLGFRM5YL0Y8OBqd+XhCjb0OfD/AfgCUtedVEPwNqrfW8KzgGw==
   dependencies:
     tslib "^2.3.0"
@@ -314,7 +314,7 @@
 
 "@ant-design/icons-angular@^16.0.0":
   version "16.0.0"
-  resolved "https://registry.npmjs.org/@ant-design/icons-angular/-/icons-angular-16.0.0.tgz"
+  resolved "https://registry.yarnpkg.com/@ant-design/icons-angular/-/icons-angular-16.0.0.tgz#32a80e66cfc85e1bcfed232498251aeb8e524e4a"
   integrity sha512-KWBmWZl2so49R/MdAT7aG+xaBlMKl9SArR3Du/iPA0Am9GI1i9R89KgnnLWz+gkzHTye15S1IBXpgts4GPPU/w==
   dependencies:
     "@ant-design/colors" "^7.0.0"
@@ -2216,7 +2216,7 @@
 
 "@popperjs/core@^2.11.8":
   version "2.11.8"
-  resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.8.tgz#6b79032e760a0899cd4204710beede972a3a185f"
+  resolved "https://registry.npmjs.org/@popperjs/core/-/core-2.11.8.tgz"
   integrity sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==
 
 "@protobufjs/aspromise@^1.1.1", "@protobufjs/aspromise@^1.1.2":
@@ -5761,7 +5761,7 @@ neo-async@^2.6.2:
 
 ng-zorro-antd@^16.2.2:
   version "16.2.2"
-  resolved "https://registry.npmjs.org/ng-zorro-antd/-/ng-zorro-antd-16.2.2.tgz"
+  resolved "https://registry.yarnpkg.com/ng-zorro-antd/-/ng-zorro-antd-16.2.2.tgz#40970f76443e44299a3d276ef00c40171eaf9bcd"
   integrity sha512-Y7ALO+iRjqBfVW9hqnlU4jJUovM5r6wNzXuwTxKIo/5c35/PJFwk++73iwhas6pCb3+kFucwL5XTUWUoLce3wQ==
   dependencies:
     "@angular/cdk" "^16.0.0"
@@ -5802,9 +5802,9 @@ node-forge@^1:
   integrity sha512-dPEtOeMvF9VMcYV/1Wb8CPoVAXtp6MKMlcbAt4ddqmGqUJ6fQZFXkNZNkNlfevtNkGtaSoXf/vNNNSvgrdXwtA==
 
 node-gyp-build@^4.2.2:
-  version "4.8.0"
-  resolved "https://registry.yarnpkg.com/node-gyp-build/-/node-gyp-build-4.8.0.tgz#3fee9c1731df4581a3f9ead74664369ff00d26dd"
-  integrity sha512-u6fs2AEUljNho3EYTJNBfImO5QTo/J/1Etd+NVdCj7qWKUSN/bSLkZwhDv7I+w/MSC6qJ4cknepkAYykDdK8og==
+  version "4.8.1"
+  resolved "https://registry.yarnpkg.com/node-gyp-build/-/node-gyp-build-4.8.1.tgz#976d3ad905e71b76086f4f0b0d3637fe79b6cda5"
+  integrity sha512-OSs33Z9yWr148JZcbZd5WiAXhh/n9z8TxQcdMhIOlpN9AhWpLfvVFO73+m77bBABQMaY9XSvIa+qk0jlI7Gcaw==
 
 node-gyp@^9.0.0:
   version "9.4.1"

@@ -35,6 +35,7 @@ export class ProductComponent extends BaseComponent {
   ) {
     super();
     this.id = this.activatedRoute.snapshot.params['id'];
+    this.getData = this.getData.bind(this)
   }
 
   override ngOnInit() {

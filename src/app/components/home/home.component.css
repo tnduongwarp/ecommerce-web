@@ -6,6 +6,10 @@
     color: #fff;
     overflow: hidden;
   }
+  #myCarousel{
+    height: 300px;
+    max-height: 300px;
+  }
   /* .item {
     position: relative;
     width: 100%;

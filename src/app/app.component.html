@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-main" style="padding-bottom: 0;">
   <div class="container-fluid">
     <a routerLink="/" class="navbar-brand">
-      <img src="./assets/img/logo.png" alt="logo" id="logo"> ECommerce
+      <img src="./assets/img/logo.png" alt="logo" id="logo"> Solar Market
     </a>
     <button class="navbar-toggler" (click)="isCollapsed = !isCollapsed">
       <span class="navbar-toggler-icon"></span>
@@ -9,7 +9,7 @@
     <div [ngbCollapse]="isCollapsed" style="align-items: left;" class="collapse navbar-collapse flex-column"
       id="navbarNav">
       <div class="input-group w-75">
-        <input type="text" name="search" class="form-control" [(ngModel)]="searchTerm" (keyup.enter)="search()">
+        <input type="text" name="search" placeholder="Tìm kiếm theo tên, mô tả sản phẩm..." class="form-control" [(ngModel)]="searchTerm" (keyup.enter)="search()">
         <span id="searchBtn" class="bg-warning" (click)="search()">
           <i class="fa fa-search"></i>
         </span>
