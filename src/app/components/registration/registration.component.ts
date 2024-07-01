@@ -46,19 +46,18 @@ export class RegistrationComponent extends BaseComponent {
         email: this.validateForm.value.email,
         password: this.validateForm.value.password,
         role: 'user',
-        isSeller: this.validateForm.value.agree
       }
       this.api.post(this.apiUrl(this.authApiUrl)+'signUp', bodySignUp)
       .then((res: any) => {
         if(!res.error){
-          this.createNotification('success','Sign up successfully, Login now!')
+          this.createNotification('success','Đăng ký thành công, Bây giờ bạn có thể đăng nhập!')
           setTimeout(() => {
             this.router.navigateByUrl('/login')
           }, 2000)
         }
       })
       .catch((err: any) => {
-        this.createNotification('error', err.message)
+        this.createNotification('error', err.error.message)
       })
     } else {
       Object.values(this.validateForm.controls).forEach(control => {
@@ -91,7 +90,7 @@ export class RegistrationComponent extends BaseComponent {
   createNotification(type: string, message:string): void {
     this.notification.create(
       type,
-      'Notification Title',
+      '',
       message
     );
   }
