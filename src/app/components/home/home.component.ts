@@ -1,22 +1,16 @@
-//Homecomponent.ts - Type Script file that contains code to render home page  to elearning application
-
-//including the required files and services
 import { Component, OnInit } from '@angular/core';
-import { RestApiService } from '../../service/rest-api.service';
 import { BaseComponent } from '../../base/base.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Const } from '../../const/const';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { ChatComponent } from '../../modals/chat/views/chat/chat.component';
 
-//component specific details
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
 
-//Exporting the HomeComponent
 export class HomeComponent extends BaseComponent {
   public products: any  = [];
   public isLoading: boolean = false;
@@ -41,10 +35,12 @@ export class HomeComponent extends BaseComponent {
       this.sortBy = queryParams['sortBy'];
       let condition: any = {}
       if(queryParams?.page){
+        this.pageIndex = queryParams.page
         condition.skip = (this.pageIndex - 1)*this.pageSize;
         condition.limit = this.pageSize
       }else{
-        this.routeWithQueryUrl({page: 1})
+        let page = this.activatedRoute?.snapshot?.queryParams['page'] || 1;
+        this.routeWithQueryUrl({page})
       }
       if(queryParams?.product) {
         condition['product'] = queryParams.product

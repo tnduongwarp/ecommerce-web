@@ -85,7 +85,10 @@ export class MyordersComponent extends BaseComponent {
   public getStatusText(status: string){
     switch(status){
       case 'created': return 'Người bán đang chuẩn bị hàng'
-      case 'inProgress': return 'Đang giao hàng'
+      case 'inTransit': return 'Đang giao hàng'
+      case 'paid': return 'Đã thanh toán'
+      case 'needReview': return 'Chờ đánh giá'
+      case 'getted': return 'Đã nhận hàng'
       case 'completed': return 'Đã hoàn thành'
     }
   }
