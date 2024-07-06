@@ -90,11 +90,17 @@
             <div *ngFor="let review of product.reviews" class="review">
               <div class="p-3">
                 <div style="display: flex; align-items: center; ">
-                  <img [src]="review.owner.picture" alt="" width="40px" class="rounded-circle">
+                  <img [src]="review?.owner?.picture" alt="" width="40px" class="rounded-circle img-avt">
                   <div class="lead d-inline ml-3" style="font-size: 15px; font-weight: 500;">{{review.owner?.name || (review.owner.firstname+ ' ' + review.owner.lastname) }}</div>
                 </div>
                 <nz-rate style="transform: scale(0.7);" [ngModel]="review.rating" nzAllowHalf nzDisabled></nz-rate>
                 <p class="mt-3">{{ review.description }}</p>
+                <ng-container *ngIf="review.reply">
+                  <div style="color: rgb(197, 189, 189);">
+                    <span>Phản hồi: </span>
+                    <span>{{review.reply}}</span>
+                  </div>
+                </ng-container>
               </div>
               <nz-divider></nz-divider>
             </div>

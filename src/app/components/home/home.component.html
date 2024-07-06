@@ -35,7 +35,7 @@
             </div>
             <div class="content-line">
               <div class="label"> <span nz-icon nzType="star" nzTheme="outline"></span>Đánh giá: </div>
-              <div class="content"><span>{{shopInfo.avgRate}} ({{shopInfo.totalReview}})</span></div>
+              <div class="content"><span>{{roundToOneDecimalPlace(shopInfo.avgRate)}} ({{shopInfo.totalReview}})</span></div>
             </div>
           </div>
           <div class="content-col">

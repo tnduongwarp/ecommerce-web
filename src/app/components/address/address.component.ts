@@ -113,7 +113,7 @@ export class AddressComponent extends BaseComponent {
   }
 
   changeDefaultAddress(event: string){
-    let metadata = JSON.parse(localStorage.getItem('user')!)?.metadata;
+    let metadata = JSON.parse(localStorage.getItem('user')!)?.metadata || {};
     metadata['defaultAddress'] = event;
     const id = JSON.parse(localStorage.getItem('user')!)._id;
       if(!id) return;
