@@ -16,7 +16,7 @@ export class ForgotPWForm{
   otp: any;
   constructor(private modalService: NzModalService, private api : RestApiService, private notification: NzNotificationService){}
   get txtForgotPwdGuide(){
-    return this.phase === 1 ? "Please enter your email." : "We have send a Code to your email, please enter that code and change password."
+    return this.phase === 1 ? "Hãy nhập email của bạn." : "Chúng tôi đã gửi một mã đến email của bạn. Hãy nhập mã và thay đổi mật khẩu."
   }
   public phase = 1;
   public isLoading : boolean = false;
@@ -81,8 +81,8 @@ export class ForgotPWForm{
       case 2: {
         if(this.inputCode !== this.otp){
           this.notification.error(
-            'Error',
-            'OTP is incorrect!',
+            'Lỗi',
+            'Mã không chính xác!',
             { nzDuration: 2000}
           );
           this.modalService.closeAll()
@@ -92,16 +92,16 @@ export class ForgotPWForm{
           .then((res: any) => {
             this.isLoading = false;
             this.notification.success(
-              'Success',
-              'Change Password Successfully!',
+              'Thành công',
+              'Thay đổi mật khẩu thành công!',
               { nzDuration: 2000}
             );
             this.modalService.closeAll();
           })
           .catch((err: any) => {
             this.notification.error(
-              'Error',
-              'Server Error.',
+              'Lỗi',
+              'Đã có lỗi xảy ra. Hãy thử lại sau.',
               { nzDuration: 2000}
             );
           })
